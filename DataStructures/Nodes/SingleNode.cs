@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DataStructures.Nodes
+﻿namespace DataStructures.Nodes
 {
-    class SingleNode
+    internal class SingleNode<T>
     {
+        public SingleNode(T value, SingleNode<T> next)
+        {
+            this.Value = value;
+            this.Next = next;
+        }
+
+        public T Value { get; set; }
+
+        public SingleNode<T> Next { get; set; }
     }
 }
