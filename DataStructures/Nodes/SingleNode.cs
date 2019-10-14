@@ -2,7 +2,7 @@
 {
     internal class SingleNode<T>
     {
-        public SingleNode(T value, SingleNode<T> next)
+        public SingleNode(T value, SingleNode<T> next = null)
         {
             this.Value = value;
             this.Next = next;

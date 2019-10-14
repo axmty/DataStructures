@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DataStructures
 {
@@ -38,7 +37,18 @@ namespace DataStructures
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            var newNode = new SingleNode<T>(item);
+            
+            if (_tail == null)
+            {
+                _head = newNode;
+                _tail = newNode;
+            }
+            else
+            {
+                _tail.Next = newNode;
+                _tail = _tail.Next;
+            }
         }
 
         public void Clear()
