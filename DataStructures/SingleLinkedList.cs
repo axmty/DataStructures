@@ -98,7 +98,21 @@ namespace DataStructures
 
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            var index = 0;
+            var node = _head;
+
+            while (node != null)
+            {
+                if (node.Value.Equals(item))
+                {
+                    return index;
+                }
+
+                index++;
+                node = node.Next;
+            }
+
+            return -1;
         }
 
         public void Insert(int index, T item)
