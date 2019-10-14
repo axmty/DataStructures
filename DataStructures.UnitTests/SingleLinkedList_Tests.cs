@@ -49,5 +49,21 @@ namespace DataStructures.UnitTests
 
             list.Count.Should().Be(0);
         }
+
+        [Fact]
+        public void Contains_ShouldReturnTrue_WhenListContainsTheItem()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.Contains(3).Should().BeTrue();
+        }
+
+        [Fact]
+        public void Contains_ShouldReturnFalse_WhenListDoesNotContainTheItem()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.Contains(4).Should().BeTrue();
+        }
     }
 }
