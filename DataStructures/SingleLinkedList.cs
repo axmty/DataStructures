@@ -8,15 +8,8 @@ namespace DataStructures
 {
     public class SingleLinkedList<T> : IList<T>
     {
-        private SingleNode<T> _head { get; set; }
-
-        private SingleNode<T> _tail { get; set; }
-
-        public SingleLinkedList()
-        {
-            _head = null;
-            _tail = null;
-        }
+        private SingleNode<T> _head;
+        private SingleNode<T> _tail;
 
         public T this[int index]
         {
