@@ -39,5 +39,15 @@ namespace DataStructures.UnitTests
                 list[i].Should().Be(i);
             }
         }
+
+        [Fact]
+        public void Clear_ShouldMakeCountToZero()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.Clear();
+
+            list.Count.Should().Be(0);
+        }
     }
 }
