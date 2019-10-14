@@ -59,7 +59,15 @@ namespace DataStructures
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            for (var node = _head; node != null; node = node.Next)
+            {
+                if (node.Value.Equals(item))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
