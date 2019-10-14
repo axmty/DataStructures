@@ -65,5 +65,35 @@ namespace DataStructures.UnitTests
 
             list.Contains(4).Should().BeFalse();
         }
+
+        [Fact]
+        public void CopyTo_ShouldThrow_WhenArrayIsNull()
+        {
+            var list = new SingleLinkedList<int>();
+
+            Action copyTo = () => list.CopyTo(null, 3);
+
+            copyTo.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void CopyTo_ShouldThrow_WhenArrayIndexIsLessThanZero()
+        {
+            var list = new SingleLinkedList<int>();
+
+            Action copyTo = () => list.CopyTo(new int[3], -1);
+
+            copyTo.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void CopyTo_ShouldThrow_WhenArraySpaceFromIndexIsNotLargeEnough()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            Action copyTo = () => list.CopyTo(new int[1], 0);
+
+            copyTo.Should().Throw<ArgumentException>();
+        }
     }
 }
