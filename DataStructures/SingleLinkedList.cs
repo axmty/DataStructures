@@ -72,7 +72,28 @@ namespace DataStructures
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            if (array == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else if (arrayIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else if (array.Length - arrayIndex < this.Count)
+            {
+                throw new ArgumentException();
+            }
+
+            var node = _head;
+            var index = arrayIndex;
+
+            while (node != null)
+            {
+                array[index] = node.Value;
+                index++;
+                node = node.Next;
+            }
         }
 
         public int IndexOf(T item)

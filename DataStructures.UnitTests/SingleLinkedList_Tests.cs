@@ -83,17 +83,39 @@ namespace DataStructures.UnitTests
 
             Action copyTo = () => list.CopyTo(new int[3], -1);
 
-            copyTo.Should().Throw<ArgumentNullException>();
+            copyTo.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Fact]
         public void CopyTo_ShouldThrow_WhenArraySpaceFromIndexIsNotLargeEnough()
         {
-            var list = new SingleLinkedList<int> { 1, 2, 3 };
+            var list = new SingleLinkedList<int> { 1, 2 };
 
             Action copyTo = () => list.CopyTo(new int[1], 0);
 
             copyTo.Should().Throw<ArgumentException>();
+        }
+
+        [Fact]
+        public void CopyTo_ShouldModifyTheArray_WhenListIsNotEmpty()
+        {
+            var list = new SingleLinkedList<int> { 1, 2 };
+            var array = new int[] { 0, 0, 0, 0 };
+
+            list.CopyTo(array, 1);
+
+            array.Should().ContainInOrder(new int[] { 0, 1, 2, 0 });
+        }
+
+        [Fact]
+        public void CopyTo_ShouldModifyTheArray_WhenListIsEmpty()
+        {
+            var list = new SingleLinkedList<int>();
+            var array = new int[] { 0, 0, 0, 0 };
+
+            list.CopyTo(array, 1);
+
+            array.Should().ContainInOrder(new int[] { 0, 0, 0, 0 });
         }
     }
 }
