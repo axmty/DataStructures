@@ -53,7 +53,8 @@ namespace DataStructures
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            _head = null;
+            _tail = null;
         }
 
         public bool Contains(T item)
