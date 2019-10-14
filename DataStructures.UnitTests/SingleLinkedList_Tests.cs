@@ -117,5 +117,21 @@ namespace DataStructures.UnitTests
 
             array.Should().ContainInOrder(new int[] { 0, 0, 0, 0 });
         }
+
+        [Fact]
+        public void IndexOf_ShouldReturnMinusOne_WhenItemIsNotInTheList()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.IndexOf(4).Should().Be(-1);
+        }
+
+        [Fact]
+        public void IndexOf_ShouldReturnPositiveIndex_WhenItemIsInTheList()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.IndexOf(3).Should().Be(2);
+        }
     }
 }
