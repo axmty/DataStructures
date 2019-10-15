@@ -112,7 +112,30 @@ namespace DataStructures
 
         public void Insert(int index, T item)
         {
+            if (index < 0 || index > this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
 
+            if (index == this.Count)
+            {
+                this.Add(item);
+            }
+            else if (index == 0)
+            {
+                _head = new SingleNode<T>(item, _head);
+            }
+            else
+            {
+                var node = _head;
+
+                for (var currentIndex = 0; currentIndex < index - 1; currentIndex++)
+                {
+                    node = node.Next;
+                }
+
+                node.Next = new SingleNode<T>(item, node.Next);
+            }
         }
 
         public bool Remove(T item)
