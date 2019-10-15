@@ -198,6 +198,43 @@ namespace DataStructures.UnitTests
 
         [Theory]
         [InlineData(0)]
+        [InlineData(-1, 1, 2, 3)]
+        [InlineData(3, 1, 2, 3)]
+        public void RemoveAt_ShouldThrow_WhenIndexIsNotWithinTheListLimits(int indexToRemove, params int[] listItems)
+        {
+            var list = new SingleLinkedList<int>();
+            foreach (var item in listItems)
+            {
+                list.Add(item);
+            }
+
+            Action removeAt = () => list.RemoveAt(indexToRemove);
+
+            removeAt.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Theory]
+        [InlineData(0, 1)]
+        [InlineData(1, 1)]
+        [InlineData(2, 1, 2, 3)]
+        [InlineData(3, 1, 2, 3)]
+        public void RemoveAt_ShouldModifyTheList_WhenIndexIsWithinTheListLimits(int indexToRemove, params int[] listItems)
+        {
+            var list = new SingleLinkedList<int>();
+            foreach (var item in listItems)
+            {
+                list.Add(item);
+            }
+
+            list.RemoveAt(indexToRemove);
+            var expected = listItems.ToList();
+            expected.RemoveAt(indexToRemove);
+
+            list.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+        }
+
+        [Theory]
+        [InlineData(0)]
         [InlineData(1)]
         [InlineData(2)]
         public void GetEnumerator_ShouldReturnTraversableEnumerator(int listLength)
