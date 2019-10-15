@@ -104,19 +104,21 @@ namespace DataStructures.UnitTests
             var array = new int[] { 0, 0, 0, 0 };
 
             list.CopyTo(array, 1);
+            var expected = new int[] { 0, 1, 2, 0 };
 
-            array.Should().ContainInOrder(new int[] { 0, 1, 2, 0 });
+            array.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
         }
 
         [Fact]
-        public void CopyTo_ShouldModifyTheArray_WhenListIsEmpty()
+        public void CopyTo_ShouldNotModifyTheArray_WhenListIsEmpty()
         {
             var list = new SingleLinkedList<int>();
             var array = new int[] { 0, 0, 0, 0 };
 
             list.CopyTo(array, 1);
+            var expected = new int[] { 0, 0, 0, 0 };
 
-            array.Should().ContainInOrder(new int[] { 0, 0, 0, 0 });
+            array.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
         }
 
         [Fact]
@@ -160,6 +162,30 @@ namespace DataStructures.UnitTests
 
             list.Count.Should().Be(4);
             list[index].Should().Be(0);
+        }
+
+        [Fact]
+        public void Remove_ShouldReturnTrueAndModifyTheList_WhenItemIsFound()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            var result = list.Remove(2);
+            var expected = new int[] { 1, 3 };
+
+            result.Should().BeTrue();
+            list.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+        }
+
+        [Fact]
+        public void Remove_ShouldReturnFalseAndNotModifyTheList_WhenItemIsNotFound()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            var result = list.Remove(0);
+            var expected = new int[] { 1, 2, 3 };
+
+            result.Should().BeFalse();
+            list.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
         }
     }
 }
