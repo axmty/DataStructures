@@ -1,6 +1,7 @@
 using Xunit;
 using FluentAssertions;
 using System;
+using System.Linq;
 
 namespace DataStructures.UnitTests
 {
@@ -132,6 +133,33 @@ namespace DataStructures.UnitTests
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
             list.IndexOf(3).Should().Be(2);
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(4)]
+        public void Insert_ShouldThrow_WhenIndexIsNotWithinTheListLimits(int index)
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            Action insert = () => list.Insert(index, 0);
+
+            insert.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(3)]
+        public void Insert_ShouldModifyTheList_WhenIndexIsWithinTheListLimits(int index)
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.Insert(index, 0);
+
+            list.Count.Should().Be(4);
+            list[index].Should().Be(0);
         }
     }
 }

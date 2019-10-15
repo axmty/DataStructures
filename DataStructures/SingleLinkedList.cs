@@ -101,23 +101,18 @@ namespace DataStructures
             var index = 0;
             var node = _head;
 
-            while (node != null)
+            while (node != null && !node.Value.Equals(item))
             {
-                if (node.Value.Equals(item))
-                {
-                    return index;
-                }
-
                 index++;
                 node = node.Next;
             }
 
-            return -1;
+            return node == null ? -1 : index;
         }
 
         public void Insert(int index, T item)
         {
-            throw new NotImplementedException();
+
         }
 
         public bool Remove(T item)
