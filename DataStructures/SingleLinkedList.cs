@@ -140,7 +140,35 @@ namespace DataStructures
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            SingleNode<T> previousNode = null;
+            var currentNode = _head;
+
+            while (currentNode != null)
+            {
+                if (currentNode.Value.Equals(item))
+                {
+                    if (previousNode == null)
+                    {
+                        _head = _head.Next;
+                    }
+                    else
+                    {
+                        previousNode.Next = currentNode.Next;
+
+                        if (previousNode.Next == null)
+                        {
+                            _tail = previousNode;
+                        }
+                    }
+
+                    return true;
+                }
+
+                previousNode = currentNode;
+                currentNode = currentNode.Next;
+            }
+
+            return false;
         }
 
         public void RemoveAt(int index)

@@ -164,13 +164,21 @@ namespace DataStructures.UnitTests
             list[index].Should().Be(0);
         }
 
-        [Fact]
-        public void Remove_ShouldReturnTrueAndModifyTheList_WhenItemIsFound()
+        [Theory]
+        [InlineData(1, 1, 2, 3)]
+        [InlineData(1, 1)]
+        [InlineData(2, 1, 2, 3)]
+        [InlineData(3, 1, 2, 3)]
+        public void Remove_ShouldReturnTrueAndModifyTheList_WhenItemIsFound(int itemToFind, params int[] listItems)
         {
-            var list = new SingleLinkedList<int> { 1, 2, 3 };
+            var list = new SingleLinkedList<int>();
+            foreach (var item in listItems)
+            {
+                list.Add(item);
+            }
 
-            var result = list.Remove(2);
-            var expected = new int[] { 1, 3 };
+            var result = list.Remove(itemToFind);
+            var expected = listItems.Except(new int[] { itemToFind });
 
             result.Should().BeTrue();
             list.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
