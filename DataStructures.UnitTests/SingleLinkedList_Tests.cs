@@ -195,5 +195,28 @@ namespace DataStructures.UnitTests
             result.Should().BeFalse();
             list.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
         }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void GetEnumerator_ShouldReturnTraversableEnumerator(int listLength)
+        {
+            var list = new SingleLinkedList<int>();
+            for (int i = 0; i < listLength; i++)
+            {
+                list.Add(i);
+            }
+
+            var enumerator = list.GetEnumerator();
+
+            for (int i = 0; i < listLength; i++)
+            {
+                enumerator.MoveNext().Should().BeTrue();
+                enumerator.Current.Should().Be(i);
+            }
+
+            enumerator.MoveNext().Should().BeFalse();
+        }
     }
 }
