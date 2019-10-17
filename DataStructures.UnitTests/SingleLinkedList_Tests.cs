@@ -295,7 +295,7 @@ namespace DataStructures.UnitTests
         [Fact]
         public void Exists_ShouldReturnTrue_WhenAnItemMatchesThePredicate()
         {
-            Predicate<int> predicate = x => x == 1;
+            static bool predicate(int x) => x == 1;
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
             list.Exists(predicate).Should().BeTrue();
@@ -304,7 +304,7 @@ namespace DataStructures.UnitTests
         [Fact]
         public void Exists_ShouldReturnFalse_WhenListIsNotEmptyAndNoItemMatchesThePredicate()
         {
-            Predicate<int> predicate = x => x == 1;
+            static bool predicate(int x) => x == 1;
             var list = new SingleLinkedList<int> { 2, 3 };
 
             list.Exists(predicate).Should().BeFalse();
@@ -313,7 +313,7 @@ namespace DataStructures.UnitTests
         [Fact]
         public void Exists_ShouldReturnFalse_WhenListIsEmpty()
         {
-            Predicate<int> predicate = x => x == 1;
+            static bool predicate(int x) => x == 1;
             var list = new SingleLinkedList<int>();
 
             list.Exists(predicate).Should().BeFalse();
@@ -322,7 +322,7 @@ namespace DataStructures.UnitTests
         [Fact]
         public void Find_ShouldReturnDefault_WhenNoItemMatches()
         {
-            Predicate<int> predicate = x => x % 4 == 0;
+            static bool predicate(int x) => x % 4 == 0;
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
             list.Find(predicate).Should().Be(default);
@@ -331,10 +331,28 @@ namespace DataStructures.UnitTests
         [Fact]
         public void Find_ShouldReturnTheFirstMatchingItem_WhenAtLeastOneItemMatches()
         {
-            Predicate<int> predicate = x => x % 4 == 0;
+            static bool predicate(int x) => x % 4 == 0;
             var list = new SingleLinkedList<int> { 1, 2, 3, 4, 8 };
 
             list.Find(predicate).Should().Be(4);
+        }
+
+        [Fact]
+        public void FindAll_ShouldReturnMatchingElements_WhenAtLeastOneItemMatches()
+        {
+            static bool predicate(int x) => x % 4 == 0;
+            var list = new SingleLinkedList<int> { 1, 2, 3, 4, 8 };
+
+            list.FindAll(predicate).Should().BeEquivalentTo(new int[] { 4, 8 });
+        }
+
+        [Fact]
+        public void FindAll_ShouldReturnEmptyList_WhenNoItemMatches()
+        {
+            static bool predicate(int x) => x % 4 == 0;
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.FindAll(predicate).Should().BeEquivalentTo(new int[0]);
         }
     }
 }
