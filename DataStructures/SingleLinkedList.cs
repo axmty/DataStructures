@@ -212,7 +212,14 @@ namespace DataStructures
 
         public bool Exists(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            var node = _head;
+
+            while (node != null && !match(node.Value))
+            {
+                node = node.Next;
+            }
+
+            return node != null;
         }
 
         public T Find(Predicate<T> match)
