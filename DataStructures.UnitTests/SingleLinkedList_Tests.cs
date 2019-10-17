@@ -140,7 +140,7 @@ namespace DataStructures.UnitTests
         [Theory]
         [InlineData(-1)]
         [InlineData(4)]
-        public void Insert_ShouldThrow_WhenIndexIsNotWithinTheListLimits(int index)
+        public void Insert_ShouldThrow_WhenIndexIsOutsideTheListLimits(int index)
         {
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
@@ -154,7 +154,7 @@ namespace DataStructures.UnitTests
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(3)]
-        public void Insert_ShouldModifyTheList_WhenIndexIsWithinTheListLimits(int index)
+        public void Insert_ShouldModifyTheList_WhenIndexIsInsideTheListLimits(int index)
         {
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
@@ -200,7 +200,7 @@ namespace DataStructures.UnitTests
         [InlineData(0)]
         [InlineData(-1, 1, 2, 3)]
         [InlineData(3, 1, 2, 3)]
-        public void RemoveAt_ShouldThrow_WhenIndexIsNotWithinTheListLimits(int indexToRemove, params int[] listItems)
+        public void RemoveAt_ShouldThrow_WhenIndexIsOutsideTheListLimits(int indexToRemove, params int[] listItems)
         {
             var list = new SingleLinkedList<int>();
             foreach (var item in listItems)
@@ -218,7 +218,7 @@ namespace DataStructures.UnitTests
         [InlineData(0, 1, 2, 3)]
         [InlineData(1, 1, 2, 3)]
         [InlineData(2, 1, 2, 3)]
-        public void RemoveAt_ShouldModifyTheList_WhenIndexIsWithinTheListLimits(int indexToRemove, params int[] listItems)
+        public void RemoveAt_ShouldModifyTheList_WhenIndexIsInsideTheListLimits(int indexToRemove, params int[] listItems)
         {
             var list = new SingleLinkedList<int>();
             foreach (var item in listItems)
@@ -322,55 +322,79 @@ namespace DataStructures.UnitTests
         [Fact]
         public void Find_ShouldReturnDefault_WhenNoItemMatches()
         {
-            static bool predicate(int x) => x % 4 == 0;
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
-            list.Find(predicate).Should().Be(default);
+            list.Find(IsDivisibleByFour).Should().Be(default);
         }
 
         [Fact]
         public void Find_ShouldReturnTheFirstMatchingItem_WhenAtLeastOneItemMatches()
         {
-            static bool predicate(int x) => x % 4 == 0;
             var list = new SingleLinkedList<int> { 1, 2, 3, 4, 8 };
 
-            list.Find(predicate).Should().Be(4);
+            list.Find(IsDivisibleByFour).Should().Be(4);
         }
 
         [Fact]
         public void FindAll_ShouldReturnMatchingElements_WhenAtLeastOneItemMatches()
         {
-            static bool predicate(int x) => x % 4 == 0;
             var list = new SingleLinkedList<int> { 1, 2, 3, 4, 8 };
 
-            list.FindAll(predicate).Should().BeEquivalentTo(new int[] { 4, 8 });
+            list.FindAll(IsDivisibleByFour).Should().BeEquivalentTo(new int[] { 4, 8 });
         }
 
         [Fact]
         public void FindAll_ShouldReturnEmptyList_WhenNoItemMatches()
         {
-            static bool predicate(int x) => x % 4 == 0;
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
-            list.FindAll(predicate).Should().BeEquivalentTo(new int[0]);
+            list.FindAll(IsDivisibleByFour).Should().BeEquivalentTo(new int[0]);
         }
 
         [Fact]
         public void FindIndex_ShouldReturnFirstMatchingItemIndex_WhenAtLeastOneItemMatches()
         {
-            static bool predicate(int x) => x % 4 == 0;
             var list = new SingleLinkedList<int> { 1, 2, 3, 4, 8 };
 
-            list.FindIndex(predicate).Should().Be(3);
+            list.FindIndex(IsDivisibleByFour).Should().Be(3);
         }
 
         [Fact]
         public void FindIndex_ShouldReturnMinusOne_WhenNoItemMatches()
         {
-            static bool predicate(int x) => x % 4 == 0;
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
-            list.FindIndex(predicate).Should().Be(-1);
+            list.FindIndex(IsDivisibleByFour).Should().Be(-1);
         }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(3)]
+        public void FindIndexWithStartIndex_ShouldThrow_WhenIndexIsOutsideTheListLimits(int startIndex)
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            Func<int> findIndex = () => list.FindIndex(startIndex, IsDivisibleByFour);
+
+            findIndex.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void FindIndexWithStartIndex_ShouldReturnFirstMatchingItemIndexFromStartIndex_WhenAtLeastOneItemMatchesFromStartIndex()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3, 4, 5, 8, 16 };
+
+            list.FindIndex(4, IsDivisibleByFour).Should().Be(5);
+        }
+
+        [Fact]
+        public void FindIndexWithStartIndex_ShouldReturnMinusOne_WhenNoItemMatchesFromStartIndex()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3, 4, 5, 7 };
+
+            list.FindIndex(4, IsDivisibleByFour).Should().Be(-1);
+        }
+
+        private static bool IsDivisibleByFour(int x) => x % 4 == 0;
     }
 }
