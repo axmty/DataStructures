@@ -236,7 +236,20 @@ namespace DataStructures
 
         public SingleLinkedList<T> FindAll(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            var result = new SingleLinkedList<T>();
+            var node = _head;
+
+            while (node != null)
+            {
+                if (match(node.Value))
+                {
+                    result.Add(node.Value);
+                }
+
+                node = node.Next;
+            }
+
+            return result;
         }
 
         public int FindIndex(Predicate<T> match)
