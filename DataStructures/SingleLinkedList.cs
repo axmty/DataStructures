@@ -254,7 +254,16 @@ namespace DataStructures
 
         public int FindIndex(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            var node = _head;
+            var index = 0;
+
+            while (node != null && !match(node.Value))
+            {
+                node = node.Next;
+                index++;
+            }
+
+            return node != null ? index : -1;
         }
 
         public int FindIndex(int startIndex, Predicate<T> match)
