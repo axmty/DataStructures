@@ -370,7 +370,7 @@ namespace DataStructures.UnitTests
         [Theory]
         [InlineData(-1)]
         [InlineData(3)]
-        public void FindIndexWithStartIndex_ShouldThrow_WhenIndexIsOutsideTheListLimits(int startIndex)
+        public void FindIndex_ShouldThrow_WhenStartIndexIsOutsideTheListLimits(int startIndex)
         {
             var list = new SingleLinkedList<int> { 1, 2, 3 };
 
@@ -380,7 +380,7 @@ namespace DataStructures.UnitTests
         }
 
         [Fact]
-        public void FindIndexWithStartIndex_ShouldReturnFirstMatchingItemIndexFromStartIndex_WhenAtLeastOneItemMatchesFromStartIndex()
+        public void FindIndex_ShouldReturnFirstMatchingItemIndexFromStartIndex_WhenAtLeastOneItemMatchesFromStartIndex()
         {
             var list = new SingleLinkedList<int> { 1, 2, 3, 4, 5, 8, 16 };
 
@@ -388,7 +388,7 @@ namespace DataStructures.UnitTests
         }
 
         [Fact]
-        public void FindIndexWithStartIndex_ShouldReturnMinusOne_WhenNoItemMatchesFromStartIndex()
+        public void FindIndex_ShouldReturnMinusOne_WhenNoItemMatchesFromStartIndex()
         {
             var list = new SingleLinkedList<int> { 1, 2, 3, 4, 5, 7 };
 
