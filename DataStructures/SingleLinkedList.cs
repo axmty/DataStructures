@@ -210,6 +210,91 @@ namespace DataStructures
             }
         }
 
+        public bool Exists(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T Find(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SingleLinkedList<T> FindAll(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int FindIndex(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int FindIndex(int startIndex, Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int FindIndex(int startIndex, int count, Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public T FindLast(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int FindLastIndex(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int FindLastIndex(int startIndex, Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int FindLastIndex(int startIndex, int count, Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool InsertRange(int index, IEnumerable<T> items)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int LastIndexOf(T item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int RemoveAll(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveRange(int index, int count)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reverse()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Sort()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TrueForAll(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             return new SingleLinkedListEnumerator(_head);
