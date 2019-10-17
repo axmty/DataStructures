@@ -291,5 +291,32 @@ namespace DataStructures.UnitTests
             list.Count.Should().Be(3);
             list.Should().BeEquivalentTo(new int[] { 1, 2, 3 }, options => options.WithStrictOrdering());
         }
+
+        [Fact]
+        public void Exists_ShouldReturnTrue_WhenAnItemMatchesThePredicate()
+        {
+            Predicate<int> predicate = x => x == 1;
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.Exists(predicate).Should().BeTrue();
+        }
+
+        [Fact]
+        public void Exists_ShouldReturnFalse_WhenListIsNotEmptyAndNoItemMatchesThePredicate()
+        {
+            Predicate<int> predicate = x => x == 1;
+            var list = new SingleLinkedList<int> { 2, 3 };
+
+            list.Exists(predicate).Should().BeFalse();
+        }
+        
+        [Fact]
+        public void Exists_ShouldReturnFalse_WhenListIsEmpty()
+        {
+            Predicate<int> predicate = x => x == 1;
+            var list = new SingleLinkedList<int>();
+
+            list.Exists(predicate).Should().BeFalse();
+        }
     }
 }
