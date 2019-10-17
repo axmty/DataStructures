@@ -354,5 +354,23 @@ namespace DataStructures.UnitTests
 
             list.FindAll(predicate).Should().BeEquivalentTo(new int[0]);
         }
+
+        [Fact]
+        public void FindIndex_ShouldReturnFirstMatchingItemIndex_WhenAtLeastOneItemMatches()
+        {
+            static bool predicate(int x) => x % 4 == 0;
+            var list = new SingleLinkedList<int> { 1, 2, 3, 4, 8 };
+
+            list.FindIndex(predicate).Should().Be(3);
+        }
+
+        [Fact]
+        public void FindIndex_ShouldReturnMinusOne_WhenNoItemMatches()
+        {
+            static bool predicate(int x) => x % 4 == 0;
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.FindIndex(predicate).Should().Be(-1);
+        }
     }
 }
