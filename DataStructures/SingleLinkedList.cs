@@ -53,7 +53,10 @@ namespace DataStructures
 
         public void AddRange(IEnumerable<T> items)
         {
-            
+            foreach (var item in items)
+            {
+                this.Add(item);
+            }
         }
 
         public void Clear()
