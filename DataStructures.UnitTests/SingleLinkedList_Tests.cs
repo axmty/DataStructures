@@ -255,5 +255,41 @@ namespace DataStructures.UnitTests
 
             enumerator.MoveNext().Should().BeFalse();
         }
+
+        [Fact]
+        public void AddRange_ShouldModifyAnEmptyList_WhenTheEnumerableToAppendIsNotEmpty()
+        {
+            var toAppend = new int[] { 1, 2, 3 };
+            var list = new SingleLinkedList<int>();
+
+            list.AddRange(toAppend);
+
+            list.Count.Should().Be(toAppend.Length);
+            list.Should().BeEquivalentTo(toAppend, options => options.WithStrictOrdering());
+        }
+
+        [Fact]
+        public void AddRange_ShouldModifyANonEmptyList_WhenTheEnumerableToAppendIsNotEmpty()
+        {
+            var toAppend = new int[] { 4, 5, 6 };
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.AddRange(toAppend);
+            var expected = new int[] { 1, 2, 3, 4, 5, 6 };
+
+            list.Count.Should().Be(expected.Length);
+            list.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+        }
+
+        [Fact]
+        public void AddRange_ShouldNotModifyList_WhenTheEnumerableToAppendIsEmpty()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.AddRange(new int[0]);
+
+            list.Count.Should().Be(3);
+            list.Should().BeEquivalentTo(new int[] { 1, 2, 3 }, options => options.WithStrictOrdering());
+        }
     }
 }

@@ -51,6 +51,11 @@ namespace DataStructures
             }
         }
 
+        public void AddRange(IEnumerable<T> items)
+        {
+            
+        }
+
         public void Clear()
         {
             _head = null;
