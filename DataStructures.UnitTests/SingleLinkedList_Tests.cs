@@ -395,6 +395,35 @@ namespace DataStructures.UnitTests
             list.FindIndex(4, IsDivisibleByFour).Should().Be(-1);
         }
 
+        [Theory]
+        [InlineData(-1, 2)]
+        [InlineData(2, -1)]
+        [InlineData(1, 3)]
+        public void FindIndex_ShouldThrow_WhenStartIndexAndCountDoNotSpecifyAValidSectionOfTheList(int startIndex, int count)
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            Func<int> findIndex = () => list.FindIndex(startIndex, count, IsDivisibleByFour);
+
+            findIndex.Should().Throw<ArgumentOutOfRangeException>();
+        }
+
+        [Fact]
+        public void FindIndex_ShouldReturnFirstMatchingItemIndexFromStartIndexAndCount_WhenAtLeastOneItemMatchesFromStartIndexAndCount()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3, 4, 5, 8, 16 };
+
+            list.FindIndex(4, 2, IsDivisibleByFour).Should().Be(5);
+        }
+
+        [Fact]
+        public void FindIndex_ShouldReturnMinusOne_WhenNoItemMatchesFromStartIndexAndCount()
+        {
+            var list = new SingleLinkedList<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+            list.FindIndex(4, 3, IsDivisibleByFour).Should().Be(-1);
+        }
+
         private static bool IsDivisibleByFour(int x) => x % 4 == 0;
     }
 }

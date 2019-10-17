@@ -267,6 +267,7 @@ namespace DataStructures
             return this.FindIndex(startIndex, this.ReachNode(startIndex), match);
         }
 
+        
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
             throw new NotImplementedException();
