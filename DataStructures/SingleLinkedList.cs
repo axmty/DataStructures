@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace DataStructures
 {
-    public class SingleLinkedList<T> : IList<T>
+    public class SingleLinkedList<T> : Interfaces.IList<T>
     {
         private SingleNode<T> _head;
         private SingleNode<T> _tail;
