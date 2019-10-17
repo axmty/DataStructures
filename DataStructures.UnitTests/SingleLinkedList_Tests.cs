@@ -318,5 +318,23 @@ namespace DataStructures.UnitTests
 
             list.Exists(predicate).Should().BeFalse();
         }
+
+        [Fact]
+        public void Find_ShouldReturnDefault_WhenNoItemMatches()
+        {
+            Predicate<int> predicate = x => x % 4 == 0;
+            var list = new SingleLinkedList<int> { 1, 2, 3 };
+
+            list.Find(predicate).Should().Be(default);
+        }
+
+        [Fact]
+        public void Find_ShouldReturnTheFirstMatchingItem_WhenAtLeastOneItemMatches()
+        {
+            Predicate<int> predicate = x => x % 4 == 0;
+            var list = new SingleLinkedList<int> { 1, 2, 3, 4, 8 };
+
+            list.Find(predicate).Should().Be(4);
+        }
     }
 }

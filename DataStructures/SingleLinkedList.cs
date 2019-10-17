@@ -224,7 +224,14 @@ namespace DataStructures
 
         public T Find(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            var node = _head;
+
+            while (node != null && !match(node.Value))
+            {
+                node = node.Next;
+            }
+
+            return node != null ? node.Value : default;
         }
 
         public SingleLinkedList<T> FindAll(Predicate<T> match)
@@ -298,6 +305,11 @@ namespace DataStructures
         }
 
         public bool TrueForAll(Predicate<T> match)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ForEach(Action<T> action)
         {
             throw new NotImplementedException();
         }
