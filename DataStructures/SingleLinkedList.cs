@@ -173,7 +173,33 @@ namespace DataStructures
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            if (index < 0 || index >= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            SingleNode<T> previousNode = null;
+            var currentNode = _head;
+
+            for (int i = 0; i < index; i++)
+            {
+                previousNode = currentNode;
+                currentNode = currentNode.Next;
+            }
+
+            if (previousNode == null)
+            {
+                _head = _head.Next;
+            }
+            else
+            {
+                previousNode.Next = currentNode.Next;
+
+                if (previousNode.Next == null)
+                {
+                    _tail = previousNode;
+                }
+            }
         }
 
         public IEnumerator<T> GetEnumerator()

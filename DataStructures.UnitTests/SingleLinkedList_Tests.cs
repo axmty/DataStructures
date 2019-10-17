@@ -215,9 +215,9 @@ namespace DataStructures.UnitTests
 
         [Theory]
         [InlineData(0, 1)]
-        [InlineData(1, 1)]
+        [InlineData(0, 1, 2, 3)]
+        [InlineData(1, 1, 2, 3)]
         [InlineData(2, 1, 2, 3)]
-        [InlineData(3, 1, 2, 3)]
         public void RemoveAt_ShouldModifyTheList_WhenIndexIsWithinTheListLimits(int indexToRemove, params int[] listItems)
         {
             var list = new SingleLinkedList<int>();
