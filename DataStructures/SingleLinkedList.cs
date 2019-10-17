@@ -254,21 +254,17 @@ namespace DataStructures
 
         public int FindIndex(Predicate<T> match)
         {
-            var node = _head;
-            var index = 0;
-
-            while (node != null && !match(node.Value))
-            {
-                node = node.Next;
-                index++;
-            }
-
-            return node != null ? index : -1;
+            return this.FindIndex(0, _head, match);
         }
 
         public int FindIndex(int startIndex, Predicate<T> match)
         {
-            throw new NotImplementedException();
+            if (startIndex < 0 || startIndex >= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return this.FindIndex(startIndex, this.ReachNode(startIndex), match);
         }
 
         public int FindIndex(int startIndex, int count, Predicate<T> match)
@@ -363,6 +359,20 @@ namespace DataStructures
             }
 
             return node;
+        }
+
+        private int FindIndex(int startIndex, SingleNode<T> startNode, Predicate<T> match)
+        {
+            var node = startNode;
+            var index = startIndex;
+
+            while (node != null && !match(node.Value))
+            {
+                node = node.Next;
+                index++;
+            }
+
+            return node != null ? index : -1;
         }
 
         private class SingleLinkedListEnumerator : IEnumerator<T>
