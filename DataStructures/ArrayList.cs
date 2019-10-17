@@ -6,11 +6,17 @@ namespace DataStructures
 {
     public class ArrayList<T> : Interfaces.IList<T>
     {
-        public T this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private T[] _array = new T[0];
 
-        public int Count => throw new NotImplementedException();
+        public T this[int index]
+        {
+            get => _array[index];
+            set => _array[index] = value;
+        }
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public int Count { get; private set; } = 0;
+
+        public bool IsReadOnly => false;
 
         public void Add(T item)
         {
