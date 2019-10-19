@@ -76,12 +76,22 @@ namespace DataStructures
 
         public int FindIndex(int startIndex, Predicate<T> match)
         {
-            throw new NotImplementedException();
+            if (startIndex >= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return _array[startIndex..this.Count].FindIndex(match);
         }
 
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
-            throw new NotImplementedException();
+            if (count + startIndex > this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            return _array[startIndex..(startIndex + count)].FindIndex(match);
         }
 
         public T FindLast(Predicate<T> match)
