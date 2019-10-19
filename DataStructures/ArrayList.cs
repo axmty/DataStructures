@@ -76,7 +76,7 @@ namespace DataStructures
 
         public int FindIndex(int startIndex, Predicate<T> match)
         {
-            if (startIndex >= this.Count)
+            if (startIndex < 0 || startIndex >= this.Count)
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -86,7 +86,7 @@ namespace DataStructures
 
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
-            if (count + startIndex > this.Count)
+            if (startIndex < 0 || count < 1 || count + startIndex > this.Count)
             {
                 throw new ArgumentOutOfRangeException();
             }
