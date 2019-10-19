@@ -71,7 +71,7 @@ namespace DataStructures
 
         public int FindIndex(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            return _array[..this.Count].FindIndex(match);
         }
 
         public int FindIndex(int startIndex, Predicate<T> match)

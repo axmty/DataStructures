@@ -20,5 +20,22 @@ namespace DataStructures.Extensions
         {
             return enumerable.Where(item => match(item));
         }
+
+        public static int FindIndex<T>(this IEnumerable<T> enumerable, Predicate<T> match)
+        {
+            var index = 0;
+
+            foreach (var item in enumerable)
+            {
+                if (match(item))
+                {
+                    return index;
+                }
+
+                index++;
+            }
+
+            return -1;
+        }
     }
 }
