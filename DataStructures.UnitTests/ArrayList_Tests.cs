@@ -41,7 +41,7 @@ namespace DataStructures.UnitTests
         {
             var list = new ArrayList<int> { 1, 2, 3 };
 
-            list.Contains(4).Should().BeTrue();
+            list.Contains(4).Should().BeFalse();
         }
 
         [Fact]

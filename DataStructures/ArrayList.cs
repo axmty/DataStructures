@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DataStructures
 {
@@ -44,7 +45,7 @@ namespace DataStructures
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            return _array[..this.Count].Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
