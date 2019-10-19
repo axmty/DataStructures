@@ -61,10 +61,10 @@ namespace DataStructures
 
         public T Find(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            return _array[..this.Count].Find(match);
         }
 
-        public SingleLinkedList<T> FindAll(Predicate<T> match)
+        public Interfaces.IList<T> FindAll(Predicate<T> match)
         {
             throw new NotImplementedException();
         }

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace DataStructures.Interfaces
 {
-    interface IList<T> : System.Collections.Generic.IList<T>
+    public interface IList<T> : System.Collections.Generic.IList<T>
     {
          bool Exists(Predicate<T> match);
 
          T Find(Predicate<T> match);
 
-         SingleLinkedList<T> FindAll(Predicate<T> match);
+         IList<T> FindAll(Predicate<T> match);
 
          int FindIndex(Predicate<T> match);
 
