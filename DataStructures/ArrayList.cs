@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataStructures.Extensions;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,7 +56,7 @@ namespace DataStructures
 
         public bool Exists(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            return _array[..this.Count].Exists(match);
         }
 
         public T Find(Predicate<T> match)
