@@ -9,7 +9,7 @@ namespace DataStructures.Interfaces
 
          T Find(Predicate<T> match);
 
-         IList<T> FindAll(Predicate<T> match);
+         IEnumerable<T> FindAll(Predicate<T> match);
 
          int FindIndex(Predicate<T> match);
 

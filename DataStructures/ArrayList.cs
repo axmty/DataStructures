@@ -64,9 +64,9 @@ namespace DataStructures
             return _array[..this.Count].Find(match);
         }
 
-        public Interfaces.IList<T> FindAll(Predicate<T> match)
+        public IEnumerable<T> FindAll(Predicate<T> match)
         {
-            throw new NotImplementedException();
+            return _array[..this.Count].FindAll(match);
         }
 
         public int FindIndex(Predicate<T> match)

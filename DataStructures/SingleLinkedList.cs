@@ -234,7 +234,7 @@ namespace DataStructures
             return node != null ? node.Value : default;
         }
 
-        public Interfaces.IList<T> FindAll(Predicate<T> match)
+        public IEnumerable<T> FindAll(Predicate<T> match)
         {
             var result = new SingleLinkedList<T>();
             var node = _head;

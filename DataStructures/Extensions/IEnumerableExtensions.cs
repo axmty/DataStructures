@@ -15,5 +15,10 @@ namespace DataStructures.Extensions
         {
             return enumerable.FirstOrDefault(item => match(item));
         }
+
+        public static IEnumerable<T> FindAll<T>(this IEnumerable<T> enumerable, Predicate<T> match)
+        {
+            return enumerable.Where(item => match(item));
+        }
     }
 }
