@@ -15,5 +15,15 @@ namespace DataStructures.UnitTests
             list[1].Should().Be(4);
             list[2].Should().Be(5);
         }
+
+        [Fact]
+        public void Clear_ShouldModifyANonEmptyListToAnEmptyOne()
+        {
+            var list = new ArrayList<int> { 1, 2, 3 };
+
+            list.Clear();
+
+            list.Count.Should().Be(0);
+        }
     }
 }
