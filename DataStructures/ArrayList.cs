@@ -116,7 +116,10 @@ namespace DataStructures
 
         public void ForEach(Action<T> action)
         {
-            throw new NotImplementedException();
+            foreach (var item in _array[..this.Count])
+            {
+                action(item);
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -126,7 +129,12 @@ namespace DataStructures
 
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            if (item == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            return _array[..this.Count].FindIndex(x => item.Equals(x));
         }
 
         public void Insert(int index, T item)
