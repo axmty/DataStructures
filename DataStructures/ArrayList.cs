@@ -13,14 +13,19 @@ namespace DataStructures
             get => _array[index];
             set => _array[index] = value;
         }
-
+        
         public int Count { get; private set; } = 0;
 
         public bool IsReadOnly => false;
 
+        private int Capacity => _array.Length;
+
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            this.ResizeForNewItems(1);
+
+            _array[this.Count] = item;
+            this.Count++;
         }
 
         public void Clear()
@@ -156,6 +161,25 @@ namespace DataStructures
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        private void ResizeForNewItems(int numberToAdd)
+        {
+            var requiredSize = this.Count + numberToAdd;
+            var newSize = Math.Max(1, this.Capacity);
+
+            while (requiredSize > newSize)
+            {
+                newSize <<= 1;
+            }
+
+            if (newSize != this.Capacity)
+            {
+                var newArray = new T[newSize];
+
+                Array.Copy(_array, newArray, this.Count);
+                _array = newArray;
+            }
         }
     }
 }
