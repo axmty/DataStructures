@@ -1,4 +1,5 @@
 using FluentAssertions;
+using System;
 using Xunit;
 
 namespace DataStructures.UnitTests
@@ -24,6 +25,16 @@ namespace DataStructures.UnitTests
             list.Clear();
 
             list.Count.Should().Be(0);
+            GetAndSetAt(list, 0).Should().Throw<IndexOutOfRangeException>();
+        }
+
+        private static Action GetAndSetAt<T>(ArrayList<T> list, int index)
+        {
+            return () =>
+            {
+                var x = list[index];
+                list[index] = default;
+            };
         }
     }
 }

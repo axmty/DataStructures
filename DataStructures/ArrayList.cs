@@ -10,8 +10,17 @@ namespace DataStructures
 
         public T this[int index]
         {
-            get => _array[index];
-            set => _array[index] = value;
+            get => index < this.Count ? _array[index] : throw new IndexOutOfRangeException();
+
+            set
+            {
+                if (index >= this.Count)
+                {
+                    throw new IndexOutOfRangeException();
+                }
+
+                _array[index] = value;
+            }
         }
         
         public int Count { get; private set; } = 0;
@@ -30,7 +39,7 @@ namespace DataStructures
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            this.Count = 0;
         }
 
         public bool Contains(T item)
