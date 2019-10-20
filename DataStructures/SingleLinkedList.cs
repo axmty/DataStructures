@@ -361,6 +361,11 @@ namespace DataStructures
             var node = _head;
             var currentIndex = 0;
 
+            if (index < 0)
+            {
+                throw new IndexOutOfRangeException();
+            }
+
             while (node != null && currentIndex < index)
             {
                 node = node.Next;
