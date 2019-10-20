@@ -39,6 +39,17 @@ namespace DataStructures
             this.Count++;
         }
 
+        public void AddRange(IEnumerable<T> items)
+        {
+            this.ResizeForNewItems(items.Count());
+
+            foreach (var item in items)
+            {
+                _array[this.Count] = item;
+                this.Count++;
+            }
+        }
+
         public void Clear()
         {
             this.Count = 0;
