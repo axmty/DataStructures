@@ -91,6 +91,17 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
+        [MemberData(nameof(MemberData_CopyTo_Valid))]
+        public void CopyTo_ShouldModifyDestinationArray(object[] initial, object[] destinationArray, int arrayIndex, object[] expectedArray)
+        {
+            var list = this.Build(initial);
+
+            list.CopyTo(destinationArray, arrayIndex);
+
+            destinationArray.Should().BeEquivalentTo(expectedArray, options => options.WithStrictOrdering());
+        }
+
+        [Theory]
         [MemberData(nameof(MemberData_CopyTo_NotValid))]
         public void CopyTo_ShouldThrow_WhenArgumentsAreNotValid(object[] initial, object[] destinationArray, int arrayIndex, Type exceptionType)
         {

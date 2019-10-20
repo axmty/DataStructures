@@ -66,7 +66,7 @@ namespace DataStructures
             {
                 throw new ArgumentNullException();
             }
-            else if (arrayIndex < 0 || array.Length - arrayIndex <= this.Count)
+            else if (arrayIndex < 0 || arrayIndex >= array.Length || array.Length - arrayIndex < this.Count)
             {
                 throw new ArgumentOutOfRangeException();
             }
