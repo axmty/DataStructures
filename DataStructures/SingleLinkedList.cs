@@ -10,22 +10,7 @@ namespace DataStructures
         private SingleNode<T> _head;
         private SingleNode<T> _tail;
 
-        public int Count
-        {
-            get
-            {
-                var node = _head;
-                var count = 0;
-
-                while (node != null)
-                {
-                    count++;
-                    node = node.Next;
-                }
-
-                return count;
-            }
-        }
+        public int Count { get; private set; } = 0;
 
         public bool IsReadOnly => false;
 
@@ -49,6 +34,8 @@ namespace DataStructures
                 _tail.Next = newNode;
                 _tail = _tail.Next;
             }
+
+            this.Count++;
         }
 
         public void AddRange(IEnumerable<T> items)
@@ -63,13 +50,26 @@ namespace DataStructures
         {
             _head = null;
             _tail = null;
+            this.Count = 0;
         }
 
         public bool Contains(T item)
         {
+            Func<T, bool> compare;
+
+            if (item == null)
+            {
+                compare = x => x == null;
+            }
+            else
+            {
+                var equalityComparer = EqualityComparer<T>.Default;
+                compare = x => equalityComparer.Equals(x, item);
+            }
+
             for (var node = _head; node != null; node = node.Next)
             {
-                if (node.Value.Equals(item))
+                if (compare(node.Value))
                 {
                     return true;
                 }

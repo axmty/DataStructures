@@ -135,7 +135,7 @@ namespace DataStructures
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _array[..this.Count].Cast<T>().GetEnumerator();
         }
 
         public int IndexOf(T item)
@@ -200,7 +200,7 @@ namespace DataStructures
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _array[..this.Count].GetEnumerator();
         }
 
         private void ResizeForNewItems(int numberToAdd)

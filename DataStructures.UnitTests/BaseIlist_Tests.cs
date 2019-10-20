@@ -1,4 +1,5 @@
 using System;
+using DataStructures.Interfaces;
 using FluentAssertions;
 using Xunit;
 
@@ -11,31 +12,59 @@ namespace DataStructures.UnitTests
     /// The implementation of <see cref="Interfaces.IList{T}"/> to unit test.
     /// </typeparam>
     public abstract class BaseIList_Tests<TList>
-        where TList : Interfaces.IList<int>, new()
+        where TList : IList<object>, new()
     {
-        [Fact]
-        public void Add_ShouldModifyTheList()
+        public static TheoryData<object[], object, object[]> Add => new TheoryData<object[], object, object[]>
         {
-            var list = new TList();
+            { new object[] { }, 1, new object[] { 1 } },
+            { new object[] { 1, 2 }, 3, new object[] { 1, 2, 3 } }
+        };
 
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
+        public static TheoryData<object[], object[]> Clear => new TheoryData<object[], object[]>
+        {
+            { new object[] { }, new object[] { } },
+            { new object[] { 1, 2 }, new object[] { } }
+        };
 
-            list.Count.Should().Be(3);
-            list[0].Should().Be(1);
-            list[1].Should().Be(2);
-            list[2].Should().Be(3);
+        public static TheoryData<object[], object, bool> Contains => new TheoryData<object[], object, bool>
+        {
+            { new object[] { }, 1, false },
+            { new object[] { 1, 2, 3 }, 1, true },
+            { new object[] { 1, 2, 3 }, 4, false },
+            { new object[] { 1, 2, 3 }, null, false },
+            { new object[] { 1, 2, null }, null, true },
+            { new object[] { 1, 2, null }, 4, false }
+        };
+
+        [Theory]
+        [MemberData(nameof(Add))]
+        public void Add_ShouldModifyTheList(object[] initial, object toAdd, object[] expected)
+        {
+            var list = this.Build(initial);
+
+            list.Add(toAdd);
+
+            this.Compare(list, expected);
         }
 
-        [Fact]
-        public void Clear_ShouldEmptyTheList()
+        [Theory]
+        [MemberData(nameof(Clear))]
+        public void Clear_ShouldEmptyTheList(object[] initial, object[] expected)
         {
-            var list = new TList { 1, 2, 3 };
+            var list = this.Build(initial);
 
             list.Clear();
 
-            list.Count.Should().Be(0);
+            this.Compare(list, expected);
+        }
+
+        [Theory]
+        [MemberData(nameof(Contains))]
+        public void Contains_ShouldReturnTrue_WhenTheListHoldsTheItem(object[] initial, object seek, bool expected)
+        {
+            var list = this.Build(initial);
+
+            list.Contains(seek).Should().Be(expected);
         }
 
         [Theory]
@@ -54,9 +83,34 @@ namespace DataStructures.UnitTests
             };
 
             if (shouldThrow)
+            {
                 indexing.Should().ThrowExactly<IndexOutOfRangeException>();
+            }
             else
+            {
                 indexing.Should().NotThrow();
+            }
+        }
+
+        private TList Build(object[] items)
+        {
+            var list = new TList();
+
+            foreach (var item in items)
+            {
+                list.Add(item);
+            }
+
+            return list;
+        }
+
+        private void Compare(IList<object> list, object[] expected)
+        {
+            list.Count.Should().Be(expected.Length);
+            for (int i = 0; i < expected.Length; i++)
+            {
+                list[i].Should().Be(expected[i]);
+            }
         }
     }
 }
