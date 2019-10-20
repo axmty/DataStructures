@@ -62,6 +62,15 @@ namespace DataStructures
 
         public void CopyTo(T[] array, int arrayIndex)
         {
+            if (array == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else if (arrayIndex < 0 || array.Length - arrayIndex <= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
             Array.Copy(_array, 0, array, arrayIndex, this.Count);
         }
 

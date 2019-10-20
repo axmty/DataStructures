@@ -35,7 +35,7 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, null }, 4, false }
         };
 
-        public static TheoryData<object[], object[], int, Type> CopyToNotValid => new TheoryData<object[], object[], int, Type>
+        public static TheoryData<object[], object[], int, Type> CopyTo_NotValid => new TheoryData<object[], object[], int, Type>
         {
             { new object[] { }, null, 4, typeof(ArgumentNullException) },
             { new object[] { }, new object[4], -1, typeof(ArgumentOutOfRangeException) },
@@ -43,7 +43,7 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, 3 }, new object[] { 1, 2, 3, 4, 5, 6 }, 4, typeof(ArgumentOutOfRangeException) }
         };
 
-        public static TheoryData<object[], object[], int, object[]> CopyToValid => new TheoryData<object[], object[], int, object[]>
+        public static TheoryData<object[], object[], int, object[]> CopyTo_Valid => new TheoryData<object[], object[], int, object[]>
         {
             { new object[] { }, new object[] { 1, 2, 3 }, 2, new object[] { 1, 2, 3 } },
             { new object[] { 4, 5, 6 }, new object[] { 1, 2, 3, 4, 5, 6 }, 0, new object[] { 4, 5, 6, 4, 5, 6 } },
@@ -82,7 +82,7 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(CopyToNotValid))]
+        [MemberData(nameof(CopyTo_NotValid))]
         public void CopyTo_ShouldThrow_WhenArgumentsAreNotValid(object[] initial, object[] destinationArray, int arrayIndex, Type exceptionType)
         {
             var list = this.Build(initial);
