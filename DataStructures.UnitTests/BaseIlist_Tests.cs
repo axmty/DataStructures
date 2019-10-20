@@ -88,6 +88,7 @@ namespace DataStructures.UnitTests
             var list = this.Build(initial);
 
             list.Contains(seek).Should().Be(expected);
+            this.Compare(list, initial);
         }
 
         [Theory]
@@ -99,6 +100,7 @@ namespace DataStructures.UnitTests
             list.CopyTo(destinationArray, arrayIndex);
 
             destinationArray.Should().BeEquivalentTo(expectedArray, options => options.WithStrictOrdering());
+            this.Compare(list, initial);
         }
 
         [Theory]
@@ -114,6 +116,7 @@ namespace DataStructures.UnitTests
                 .Which
                 .Should()
                 .BeOfType(exceptionType);
+            this.Compare(list, initial);
         }
 
         [Theory]
@@ -123,6 +126,7 @@ namespace DataStructures.UnitTests
             var list = this.Build(initial);
 
             list.Exists(match).Should().Be(expected);
+            this.Compare(list, initial);
         }
 
         [Theory]
