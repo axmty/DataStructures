@@ -10,7 +10,7 @@ namespace DataStructures.UnitTests
     /// <typeparam name="TList">
     /// The implementation of <see cref="Interfaces.IList{T}"/> to unit test.
     /// </typeparam>
-    public abstract class BaseIlist_Tests<TList>
+    public abstract class BaseIList_Tests<TList>
         where TList : Interfaces.IList<int>, new()
     {
         [Fact]
