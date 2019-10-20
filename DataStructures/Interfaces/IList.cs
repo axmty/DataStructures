@@ -5,40 +5,40 @@ namespace DataStructures.Interfaces
 {
     public interface IList<T> : System.Collections.Generic.IList<T>
     {
-         bool Exists(Predicate<T> match);
+        bool Exists(Predicate<T> match);
 
-         T Find(Predicate<T> match);
+        T Find(Predicate<T> match);
 
-         IEnumerable<T> FindAll(Predicate<T> match);
+        IEnumerable<T> FindAll(Predicate<T> match);
 
-         int FindIndex(Predicate<T> match);
+        int FindIndex(Predicate<T> match);
 
-         int FindIndex(int startIndex, Predicate<T> match);
+        int FindIndex(int startIndex, Predicate<T> match);
 
-         int FindIndex(int startIndex, int count, Predicate<T> match);
+        int FindIndex(int startIndex, int count, Predicate<T> match);
 
-         T FindLast(Predicate<T> match);
+        T FindLast(Predicate<T> match);
 
-         int FindLastIndex(Predicate<T> match);
+        int FindLastIndex(Predicate<T> match);
 
-         int FindLastIndex(int startIndex, Predicate<T> match);
+        int FindLastIndex(int startIndex, Predicate<T> match);
 
-         int FindLastIndex(int startIndex, int count, Predicate<T> match);
+        int FindLastIndex(int startIndex, int count, Predicate<T> match);
 
-         bool InsertRange(int index, IEnumerable<T> items);
+        void ForEach(Action<T> action);
 
-         int LastIndexOf(T item);
+        bool InsertRange(int index, IEnumerable<T> items);
 
-         int RemoveAll(Predicate<T> match);
+        int LastIndexOf(T item);
 
-         void RemoveRange(int index, int count);
+        int RemoveAll(Predicate<T> match);
 
-         void Reverse();
+        void RemoveRange(int index, int count);
 
-         void Sort();
+        void Reverse();
 
-         bool TrueForAll(Predicate<T> match);
+        void Sort();
 
-         void ForEach(Action<T> action);
+        bool TrueForAll(Predicate<T> match);
     }
 }

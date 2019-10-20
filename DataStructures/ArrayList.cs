@@ -1,14 +1,20 @@
-﻿using DataStructures.Extensions;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DataStructures.Extensions;
 
 namespace DataStructures
 {
     public class ArrayList<T> : Interfaces.IList<T>
     {
         private T[] _array = new T[0];
+
+        public int Count { get; private set; } = 0;
+
+        public bool IsReadOnly => false;
+
+        private int Capacity => _array.Length;
 
         public T this[int index]
         {
@@ -24,12 +30,6 @@ namespace DataStructures
                 _array[index] = value;
             }
         }
-        
-        public int Count { get; private set; } = 0;
-
-        public bool IsReadOnly => false;
-
-        private int Capacity => _array.Length;
 
         public void Add(T item)
         {

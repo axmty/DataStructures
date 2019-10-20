@@ -1,7 +1,7 @@
-﻿using DataStructures.Nodes;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DataStructures.Nodes;
 
 namespace DataStructures
 {
@@ -9,12 +9,6 @@ namespace DataStructures
     {
         private SingleNode<T> _head;
         private SingleNode<T> _tail;
-
-        public T this[int index]
-        {
-            get => this.ReachNode(index).Value;
-            set => this.ReachNode(index).Value = value;
-        }
 
         public int Count
         {
@@ -35,10 +29,16 @@ namespace DataStructures
 
         public bool IsReadOnly => false;
 
+        public T this[int index]
+        {
+            get => this.ReachNode(index).Value;
+            set => this.ReachNode(index).Value = value;
+        }
+
         public void Add(T item)
         {
             var newNode = new SingleNode<T>(item);
-            
+
             if (_tail == null)
             {
                 _head = newNode;
@@ -104,112 +104,6 @@ namespace DataStructures
             }
         }
 
-        public int IndexOf(T item)
-        {
-            var index = 0;
-            var node = _head;
-
-            while (node != null && !node.Value.Equals(item))
-            {
-                index++;
-                node = node.Next;
-            }
-
-            return node == null ? -1 : index;
-        }
-
-        public void Insert(int index, T item)
-        {
-            if (index < 0 || index > this.Count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            if (index == this.Count)
-            {
-                this.Add(item);
-            }
-            else if (index == 0)
-            {
-                _head = new SingleNode<T>(item, _head);
-            }
-            else
-            {
-                var node = _head;
-
-                for (var currentIndex = 0; currentIndex < index - 1; currentIndex++)
-                {
-                    node = node.Next;
-                }
-
-                node.Next = new SingleNode<T>(item, node.Next);
-            }
-        }
-
-        public bool Remove(T item)
-        {
-            SingleNode<T> previousNode = null;
-            var currentNode = _head;
-
-            while (currentNode != null)
-            {
-                if (currentNode.Value.Equals(item))
-                {
-                    if (previousNode == null)
-                    {
-                        _head = _head.Next;
-                    }
-                    else
-                    {
-                        previousNode.Next = currentNode.Next;
-
-                        if (previousNode.Next == null)
-                        {
-                            _tail = previousNode;
-                        }
-                    }
-
-                    return true;
-                }
-
-                previousNode = currentNode;
-                currentNode = currentNode.Next;
-            }
-
-            return false;
-        }
-
-        public void RemoveAt(int index)
-        {
-            if (index < 0 || index >= this.Count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            SingleNode<T> previousNode = null;
-            var currentNode = _head;
-
-            for (int i = 0; i < index; i++)
-            {
-                previousNode = currentNode;
-                currentNode = currentNode.Next;
-            }
-
-            if (previousNode == null)
-            {
-                _head = _head.Next;
-            }
-            else
-            {
-                previousNode.Next = currentNode.Next;
-
-                if (previousNode.Next == null)
-                {
-                    _tail = previousNode;
-                }
-            }
-        }
-
         public bool Exists(Predicate<T> match)
         {
             var node = _head;
@@ -267,7 +161,6 @@ namespace DataStructures
             return this.FindIndex(startIndex, this.ReachNode(startIndex), match);
         }
 
-        
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
             throw new NotImplementedException();
@@ -293,6 +186,58 @@ namespace DataStructures
             throw new NotImplementedException();
         }
 
+        public void ForEach(Action<T> action)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return new SingleLinkedListEnumerator(_head);
+        }
+
+        public int IndexOf(T item)
+        {
+            var index = 0;
+            var node = _head;
+
+            while (node != null && !node.Value.Equals(item))
+            {
+                index++;
+                node = node.Next;
+            }
+
+            return node == null ? -1 : index;
+        }
+
+        public void Insert(int index, T item)
+        {
+            if (index < 0 || index > this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            if (index == this.Count)
+            {
+                this.Add(item);
+            }
+            else if (index == 0)
+            {
+                _head = new SingleNode<T>(item, _head);
+            }
+            else
+            {
+                var node = _head;
+
+                for (var currentIndex = 0; currentIndex < index - 1; currentIndex++)
+                {
+                    node = node.Next;
+                }
+
+                node.Next = new SingleNode<T>(item, node.Next);
+            }
+        }
+
         public bool InsertRange(int index, IEnumerable<T> items)
         {
             throw new NotImplementedException();
@@ -303,9 +248,73 @@ namespace DataStructures
             throw new NotImplementedException();
         }
 
+        public bool Remove(T item)
+        {
+            SingleNode<T> previousNode = null;
+            var currentNode = _head;
+
+            while (currentNode != null)
+            {
+                if (currentNode.Value.Equals(item))
+                {
+                    if (previousNode == null)
+                    {
+                        _head = _head.Next;
+                    }
+                    else
+                    {
+                        previousNode.Next = currentNode.Next;
+
+                        if (previousNode.Next == null)
+                        {
+                            _tail = previousNode;
+                        }
+                    }
+
+                    return true;
+                }
+
+                previousNode = currentNode;
+                currentNode = currentNode.Next;
+            }
+
+            return false;
+        }
+
         public int RemoveAll(Predicate<T> match)
         {
             throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index < 0 || index >= this.Count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            SingleNode<T> previousNode = null;
+            var currentNode = _head;
+
+            for (int i = 0; i < index; i++)
+            {
+                previousNode = currentNode;
+                currentNode = currentNode.Next;
+            }
+
+            if (previousNode == null)
+            {
+                _head = _head.Next;
+            }
+            else
+            {
+                previousNode.Next = currentNode.Next;
+
+                if (previousNode.Next == null)
+                {
+                    _tail = previousNode;
+                }
+            }
         }
 
         public void RemoveRange(int index, int count)
@@ -328,19 +337,23 @@ namespace DataStructures
             throw new NotImplementedException();
         }
 
-        public void ForEach(Action<T> action)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            return new SingleLinkedListEnumerator(_head);
-        }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
+        }
+
+        private int FindIndex(int startIndex, SingleNode<T> startNode, Predicate<T> match)
+        {
+            var node = startNode;
+            var index = startIndex;
+
+            while (node != null && !match(node.Value))
+            {
+                node = node.Next;
+                index++;
+            }
+
+            return node != null ? index : -1;
         }
 
         private SingleNode<T> ReachNode(int index)
@@ -362,25 +375,11 @@ namespace DataStructures
             return node;
         }
 
-        private int FindIndex(int startIndex, SingleNode<T> startNode, Predicate<T> match)
-        {
-            var node = startNode;
-            var index = startIndex;
-
-            while (node != null && !match(node.Value))
-            {
-                node = node.Next;
-                index++;
-            }
-
-            return node != null ? index : -1;
-        }
-
         private class SingleLinkedListEnumerator : IEnumerator<T>
         {
             private readonly SingleNode<T> _startNode;
             private SingleNode<T> _currentNode;
-            
+
             public SingleLinkedListEnumerator(SingleNode<T> startNode)
             {
                 _startNode = startNode;
@@ -390,7 +389,9 @@ namespace DataStructures
 
             object IEnumerator.Current => this.Current;
 
-            public void Dispose() { }
+            public void Dispose()
+            {
+            }
 
             public bool MoveNext()
             {

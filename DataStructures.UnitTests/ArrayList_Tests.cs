@@ -1,5 +1,5 @@
-using FluentAssertions;
 using System;
+using FluentAssertions;
 using Xunit;
 
 namespace DataStructures.UnitTests
@@ -29,14 +29,6 @@ namespace DataStructures.UnitTests
         }
 
         [Fact]
-        public void Contains_ShouldReturnTrue_WhenListHoldsTheItem()
-        {
-            var list = new ArrayList<int> { 1, 2, 3 };
-
-            list.Contains(3).Should().BeTrue();
-        }
-
-        [Fact]
         public void Contains_ShouldReturnFalse_WhenListDoesNotHoldTheItem()
         {
             var list = new ArrayList<int> { 1, 2, 3 };
@@ -50,6 +42,14 @@ namespace DataStructures.UnitTests
             var list = new ArrayList<int>();
 
             list.Contains(0).Should().BeFalse();
+        }
+
+        [Fact]
+        public void Contains_ShouldReturnTrue_WhenListHoldsTheItem()
+        {
+            var list = new ArrayList<int> { 1, 2, 3 };
+
+            list.Contains(3).Should().BeTrue();
         }
 
         private static Action GetAndSetAt<T>(ArrayList<T> list, int index)

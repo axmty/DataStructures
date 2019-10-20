@@ -10,7 +10,7 @@ namespace DataStructures.Extensions
         {
             return enumerable.Any(item => match(item));
         }
-        
+
         public static T Find<T>(this IEnumerable<T> enumerable, Predicate<T> match)
         {
             return enumerable.FirstOrDefault(item => match(item));
