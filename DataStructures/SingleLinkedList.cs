@@ -84,13 +84,9 @@ namespace DataStructures
             {
                 throw new ArgumentNullException();
             }
-            else if (arrayIndex < 0)
+            else if (arrayIndex < 0 || array.Length - arrayIndex <= this.Count)
             {
                 throw new ArgumentOutOfRangeException();
-            }
-            else if (array.Length - arrayIndex < this.Count)
-            {
-                throw new ArgumentException();
             }
 
             var node = _head;

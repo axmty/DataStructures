@@ -62,7 +62,7 @@ namespace DataStructures
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            Array.Copy(_array, 0, array, arrayIndex, this.Count);
         }
 
         public bool Exists(Predicate<T> match)

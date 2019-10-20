@@ -1,5 +1,4 @@
 using System;
-using DataStructures.Interfaces;
 using FluentAssertions;
 using Xunit;
 
@@ -12,7 +11,7 @@ namespace DataStructures.UnitTests
     /// The implementation of <see cref="Interfaces.IList{T}"/> to unit test.
     /// </typeparam>
     public abstract class BaseIList_Tests<TList>
-        where TList : IList<object>, new()
+        where TList : Interfaces.IList<object>, new()
     {
         public static TheoryData<object[], object, object[]> Add => new TheoryData<object[], object, object[]>
         {
@@ -34,6 +33,21 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, 3 }, null, false },
             { new object[] { 1, 2, null }, null, true },
             { new object[] { 1, 2, null }, 4, false }
+        };
+
+        public static TheoryData<object[], object[], int, Type> CopyToNotValid => new TheoryData<object[], object[], int, Type>
+        {
+            { new object[] { }, null, 4, typeof(ArgumentNullException) },
+            { new object[] { }, new object[4], -1, typeof(ArgumentOutOfRangeException) },
+            { new object[] { }, new object[4], 4, typeof(ArgumentOutOfRangeException) },
+            { new object[] { 1, 2, 3 }, new object[] { 1, 2, 3, 4, 5, 6 }, 4, typeof(ArgumentOutOfRangeException) }
+        };
+
+        public static TheoryData<object[], object[], int, object[]> CopyToValid => new TheoryData<object[], object[], int, object[]>
+        {
+            { new object[] { }, new object[] { 1, 2, 3 }, 2, new object[] { 1, 2, 3 } },
+            { new object[] { 4, 5, 6 }, new object[] { 1, 2, 3, 4, 5, 6 }, 0, new object[] { 4, 5, 6, 4, 5, 6 } },
+            { new object[] { 1, 2, 3 }, new object[] { 1, 2, 3, 4, 5, 6 }, 3, new object[] { 1, 2, 3, 1, 2, 3 } }
         };
 
         [Theory]
@@ -65,6 +79,21 @@ namespace DataStructures.UnitTests
             var list = this.Build(initial);
 
             list.Contains(seek).Should().Be(expected);
+        }
+
+        [Theory]
+        [MemberData(nameof(CopyToNotValid))]
+        public void CopyTo_ShouldThrow_WhenArgumentsAreNotValid(object[] initial, object[] destinationArray, int arrayIndex, Type exceptionType)
+        {
+            var list = this.Build(initial);
+
+            FluentActions
+                .Invoking(() => list.CopyTo(destinationArray, arrayIndex))
+                .Should()
+                .Throw<Exception>()
+                .Which
+                .Should()
+                .BeOfType(exceptionType);
         }
 
         [Theory]
@@ -104,7 +133,7 @@ namespace DataStructures.UnitTests
             return list;
         }
 
-        private void Compare(IList<object> list, object[] expected)
+        private void Compare(TList list, object[] expected)
         {
             list.Count.Should().Be(expected.Length);
             for (int i = 0; i < expected.Length; i++)
