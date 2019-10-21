@@ -59,6 +59,14 @@ namespace DataStructures.UnitTests
             { new object[] { 1, null, 5 }, item => EqualityComparer<object>.Default.Equals(item, null), true }
         };
 
+        public static TheoryData<object[], Predicate<object>, object> MemberData_Find => new TheoryData<object[], Predicate<object>, object>
+        {
+            { new object[] { }, item => (int)item % 2 == 0, null },
+            { new object[] { 1, 2, 3 }, item => (int)item % 2 == 0, 2 },
+            { new object[] { 1, 3, 5 }, item => (int)item % 2 == 0, null },
+            { new object[] { 1, null, 5 }, item => EqualityComparer<object>.Default.Equals(item, null), null }
+        };
+
         public static TheoryData<object[], int, bool> MemberData_Indexer => new TheoryData<object[], int, bool>
         {
             { new object[] { }, 0, true },
@@ -135,6 +143,16 @@ namespace DataStructures.UnitTests
             var list = this.Build(initial);
 
             list.Exists(match).Should().Be(expected);
+            this.Compare(list, initial);
+        }
+
+        [Theory]
+        [MemberData(nameof(MemberData_Find))]
+        public void Find_ShouldReturnTheFirstMatchingItemOrDefault(object[] initial, Predicate<object> match, object expected)
+        {
+            var list = this.Build(initial);
+
+            list.Find(match).Should().Be(expected);
             this.Compare(list, initial);
         }
 
