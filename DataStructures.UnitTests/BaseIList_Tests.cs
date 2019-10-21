@@ -59,6 +59,15 @@ namespace DataStructures.UnitTests
             { new object[] { 1, null, 5 }, item => EqualityComparer<object>.Default.Equals(item, null), true }
         };
 
+        public static TheoryData<object[], int, bool> MemberData_Indexer => new TheoryData<object[], int, bool>
+        {
+            { new object[] { }, 0, true },
+            { new object[] { 1, 2 }, -1, true },
+            { new object[] { 1, 2 }, 2, true },
+            { new object[] { 1, 2 }, 0, false },
+            { new object[] { 1, 2 }, 1, false }
+        };
+
         [Theory]
         [MemberData(nameof(MemberData_Add))]
         public void Add_ShouldModifyTheList(object[] initial, object toAdd, object[] expected)
@@ -130,13 +139,10 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [InlineData(-1, true)]
-        [InlineData(0, false)]
-        [InlineData(1, false)]
-        [InlineData(3, true)]
-        public void Indexer_ShouldThrowIndexOutOfRange_WhenIndexIsNotInAValidRange(int index, bool shouldThrow)
+        [MemberData(nameof(MemberData_Indexer))]
+        public void Indexer_ShouldThrowIndexOutOfRange_WhenIndexIsNotInAValidRange(object[] initial, int index, bool shouldThrow)
         {
-            var list = new TList { 1, 2, 3 };
+            var list = this.Build(initial);
 
             Action indexing = () =>
             {
