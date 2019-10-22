@@ -113,66 +113,9 @@ namespace DataStructures
             return _array[..this.Count].FindAll(match);
         }
 
-        /// <summary>
-        /// Complexity: O(n).
-        /// </summary>
-        public int FindIndex(Predicate<T> match)
-        {
-            return _array[..this.Count].FindIndex(match);
-        }
-
-        /// <summary>
-        /// Complexity: O(n).
-        /// </summary>
-        public int FindIndex(int startIndex, Predicate<T> match)
-        {
-            if (startIndex < 0 || startIndex >= this.Count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            return _array[startIndex..this.Count].FindIndex(match);
-        }
-
-        /// <summary>
-        /// Complexity: O(n).
-        /// </summary>
-        public int FindIndex(int startIndex, int count, Predicate<T> match)
-        {
-            if (startIndex < 0 || count < 1 || count + startIndex > this.Count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            return _array[startIndex..(startIndex + count)].FindIndex(match);
-        }
-
-        public T FindLast(Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int FindLastIndex(Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int FindLastIndex(int startIndex, Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int FindLastIndex(int startIndex, int count, Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ForEach(Action<T> action)
         {
-            foreach (var item in _array[..this.Count])
-            {
-                action(item);
-            }
+            throw new NotImplementedException();
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -182,25 +125,10 @@ namespace DataStructures
 
         public int IndexOf(T item)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException();
-            }
-
-            return _array[..this.Count].FindIndex(x => item.Equals(x));
+            throw new NotImplementedException();
         }
 
         public void Insert(int index, T item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool InsertRange(int index, IEnumerable<T> items)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int LastIndexOf(T item)
         {
             throw new NotImplementedException();
         }
@@ -210,32 +138,7 @@ namespace DataStructures
             throw new NotImplementedException();
         }
 
-        public int RemoveAll(Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
         public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveRange(int index, int count)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Reverse()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Sort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool TrueForAll(Predicate<T> match)
         {
             throw new NotImplementedException();
         }

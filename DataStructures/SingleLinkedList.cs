@@ -166,52 +166,6 @@ namespace DataStructures
             return result;
         }
 
-        /// <summary>
-        /// Complexity: O(n).
-        /// </summary>
-        public int FindIndex(Predicate<T> match)
-        {
-            return this.FindIndex(0, _head, match);
-        }
-
-        /// <summary>
-        /// Complexity: O(n).
-        /// </summary>
-        public int FindIndex(int startIndex, Predicate<T> match)
-        {
-            if (startIndex < 0 || startIndex >= this.Count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            return this.FindIndex(startIndex, this.ReachNode(startIndex), match);
-        }
-
-        public int FindIndex(int startIndex, int count, Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T FindLast(Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int FindLastIndex(Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int FindLastIndex(int startIndex, Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int FindLastIndex(int startIndex, int count, Predicate<T> match)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ForEach(Action<T> action)
         {
             throw new NotImplementedException();
@@ -238,127 +192,15 @@ namespace DataStructures
 
         public void Insert(int index, T item)
         {
-            if (index < 0 || index > this.Count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            if (index == this.Count)
-            {
-                this.Add(item);
-            }
-            else if (index == 0)
-            {
-                _head = new SingleNode<T>(item, _head);
-            }
-            else
-            {
-                var node = _head;
-
-                for (var currentIndex = 0; currentIndex < index - 1; currentIndex++)
-                {
-                    node = node.Next;
-                }
-
-                node.Next = new SingleNode<T>(item, node.Next);
-            }
-        }
-
-        public bool InsertRange(int index, IEnumerable<T> items)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int LastIndexOf(T item)
-        {
             throw new NotImplementedException();
         }
 
         public bool Remove(T item)
         {
-            SingleNode<T> previousNode = null;
-            var currentNode = _head;
-
-            while (currentNode != null)
-            {
-                if (currentNode.Value.Equals(item))
-                {
-                    if (previousNode == null)
-                    {
-                        _head = _head.Next;
-                    }
-                    else
-                    {
-                        previousNode.Next = currentNode.Next;
-
-                        if (previousNode.Next == null)
-                        {
-                            _tail = previousNode;
-                        }
-                    }
-
-                    return true;
-                }
-
-                previousNode = currentNode;
-                currentNode = currentNode.Next;
-            }
-
-            return false;
-        }
-
-        public int RemoveAll(Predicate<T> match)
-        {
             throw new NotImplementedException();
         }
 
         public void RemoveAt(int index)
-        {
-            if (index < 0 || index >= this.Count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            SingleNode<T> previousNode = null;
-            var currentNode = _head;
-
-            for (int i = 0; i < index; i++)
-            {
-                previousNode = currentNode;
-                currentNode = currentNode.Next;
-            }
-
-            if (previousNode == null)
-            {
-                _head = _head.Next;
-            }
-            else
-            {
-                previousNode.Next = currentNode.Next;
-
-                if (previousNode.Next == null)
-                {
-                    _tail = previousNode;
-                }
-            }
-        }
-
-        public void RemoveRange(int index, int count)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Reverse()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Sort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool TrueForAll(Predicate<T> match)
         {
             throw new NotImplementedException();
         }
