@@ -20,6 +20,9 @@ namespace DataStructures
             set => this.ReachNode(index).Value = value;
         }
 
+        /// <summary>
+        /// Complexity: O(1).
+        /// </summary>
         public void Add(T item)
         {
             var newNode = new SingleNode<T>(item);
@@ -38,6 +41,9 @@ namespace DataStructures
             this.Count++;
         }
 
+        /// <summary>
+        /// Complexity: O(m), where m = items.Length.
+        /// </summary>
         public void AddRange(IEnumerable<T> items)
         {
             foreach (var item in items)
@@ -46,6 +52,9 @@ namespace DataStructures
             }
         }
 
+        /// <summary>
+        /// Complexity: O(1).
+        /// </summary>
         public void Clear()
         {
             _head = null;
@@ -53,6 +62,9 @@ namespace DataStructures
             this.Count = 0;
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public bool Contains(T item)
         {
             Func<T, bool> compare;
@@ -78,6 +90,9 @@ namespace DataStructures
             return false;
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public void CopyTo(T[] array, int arrayIndex)
         {
             if (array == null)
@@ -100,6 +115,9 @@ namespace DataStructures
             }
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public bool Exists(Predicate<T> match)
         {
             var node = _head;
@@ -112,6 +130,9 @@ namespace DataStructures
             return node != null;
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public T Find(Predicate<T> match)
         {
             var node = _head;
@@ -124,6 +145,9 @@ namespace DataStructures
             return node != null ? node.Value : default;
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public IEnumerable<T> FindAll(Predicate<T> match)
         {
             var result = new SingleLinkedList<T>();
@@ -142,11 +166,17 @@ namespace DataStructures
             return result;
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public int FindIndex(Predicate<T> match)
         {
             return this.FindIndex(0, _head, match);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public int FindIndex(int startIndex, Predicate<T> match)
         {
             if (startIndex < 0 || startIndex >= this.Count)
