@@ -31,6 +31,9 @@ namespace DataStructures
             }
         }
 
+        /// <summary>
+        /// Complexity: O(1) / O(n) if resizing.
+        /// </summary>
         public void Add(T item)
         {
             this.ResizeForNewItems(1);
@@ -39,6 +42,9 @@ namespace DataStructures
             this.Count++;
         }
 
+        /// <summary>
+        /// Complexity: O(m) / O(n + m) if resizing, where m = items.Length.
+        /// </summary>
         public void AddRange(IEnumerable<T> items)
         {
             this.ResizeForNewItems(items.Count());
@@ -50,16 +56,25 @@ namespace DataStructures
             }
         }
 
+        /// <summary>
+        /// Complexity: O(1).
+        /// </summary>
         public void Clear()
         {
             this.Count = 0;
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public bool Contains(T item)
         {
             return _array[..this.Count].Contains(item);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public void CopyTo(T[] array, int arrayIndex)
         {
             if (array == null)
@@ -74,26 +89,41 @@ namespace DataStructures
             Array.Copy(_array, 0, array, arrayIndex, this.Count);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public bool Exists(Predicate<T> match)
         {
             return _array[..this.Count].Exists(match);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public T Find(Predicate<T> match)
         {
             return _array[..this.Count].Find(match);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public IEnumerable<T> FindAll(Predicate<T> match)
         {
             return _array[..this.Count].FindAll(match);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public int FindIndex(Predicate<T> match)
         {
             return _array[..this.Count].FindIndex(match);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public int FindIndex(int startIndex, Predicate<T> match)
         {
             if (startIndex < 0 || startIndex >= this.Count)
@@ -104,6 +134,9 @@ namespace DataStructures
             return _array[startIndex..this.Count].FindIndex(match);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public int FindIndex(int startIndex, int count, Predicate<T> match)
         {
             if (startIndex < 0 || count < 1 || count + startIndex > this.Count)
