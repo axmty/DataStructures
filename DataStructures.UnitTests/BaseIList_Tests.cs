@@ -75,6 +75,14 @@ namespace DataStructures.UnitTests
             { new object[] { 1, null, 5, null }, item => EqualityComparer<object>.Default.Equals(item, null), new object[] { null, null } }
         };
 
+        public static TheoryData<object[], Predicate<object>, object> MemberData_FindIndex => new TheoryData<object[], Predicate<object>, object>
+        {
+            { new object[] { }, item => (int)item % 2 == 0, -1 },
+            { new object[] { 1, 2, 3 }, item => (int)item % 2 == 0, 1 },
+            { new object[] { 1, 3, 5 }, item => (int)item % 2 == 0, -1 },
+            { new object[] { 1, null, 5 }, item => EqualityComparer<object>.Default.Equals(item, null), 1 }
+        };
+
         public static TheoryData<object[], int, bool> MemberData_Indexer => new TheoryData<object[], int, bool>
         {
             { new object[] { }, 0, true },
@@ -171,6 +179,16 @@ namespace DataStructures.UnitTests
             var list = this.Build(initial);
 
             list.FindAll(match).Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+            this.Compare(list, initial);
+        }
+
+        [Theory]
+        [MemberData(nameof(MemberData_FindIndex))]
+        public void FindIndex_ShouldReturnTheIndexOfTheFirstMatchingItemOrMinusOne(object[] initial, Predicate<object> match, int index)
+        {
+            var list = this.Build(initial);
+
+            list.FindIndex(match).Should().Be(index);
             this.Compare(list, initial);
         }
 
