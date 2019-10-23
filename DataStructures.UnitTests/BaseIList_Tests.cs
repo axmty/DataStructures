@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -73,6 +74,12 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, 3, 4 }, item => (int)item % 2 == 0, new object[] { 2, 4 } },
             { new object[] { 1, 3, 5, 7 }, item => (int)item % 2 == 0, new object[] { } },
             { new object[] { 1, null, 5, null }, item => EqualityComparer<object>.Default.Equals(item, null), new object[] { null, null } }
+        };
+
+        public static TheoryData<object[], Action<object>, object[]> MemberData_ForEach => new TheoryData<object[], Action<object>, object[]>
+        {
+            { new object[] { }, item => item = (int)item + 1, new Action<object>[] { } },
+            { new object[] { 0, 1, 2 }, item => item = (int)item + 1, new object[] { 1, 2, 3 } }
         };
 
         public static TheoryData<object[], int, bool> MemberData_Indexer => new TheoryData<object[], int, bool>
@@ -171,6 +178,18 @@ namespace DataStructures.UnitTests
             var list = this.Build(initial);
 
             list.FindAll(match).Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
+            this.Compare(list, initial);
+        }
+
+        [Theory]
+        [MemberData(nameof(MemberData_ForEach))]
+        public void ForEach_ShouldInvokeActionForAllTheItems(object[] initial, Action<object> action, object[] expected)
+        {
+            var list = this.Build(initial);
+
+            list.ForEach(action);
+
+            list.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
             this.Compare(list, initial);
         }
 
