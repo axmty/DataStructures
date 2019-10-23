@@ -128,7 +128,8 @@ namespace DataStructures
 
         public int IndexOf(T item)
         {
-            throw new NotImplementedException();
+            return _array[..this.Count]
+                .FindIndex(x => EqualityComparer<T>.Default.Equals(item, x));
         }
 
         public void Insert(int index, T item)

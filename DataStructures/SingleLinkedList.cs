@@ -166,6 +166,9 @@ namespace DataStructures
             return result;
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public void ForEach(Action<T> action)
         {
             for (var node = _head; node != null; node = node.Next)
@@ -174,17 +177,24 @@ namespace DataStructures
             }
         }
 
+        /// <summary>
+        /// Complexity: O(1).
+        /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
             return new SingleLinkedListEnumerator(_head);
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public int IndexOf(T item)
         {
             var index = 0;
             var node = _head;
+            var equalityComparer = EqualityComparer<T>.Default;
 
-            while (node != null && !node.Value.Equals(item))
+            while (node != null && !equalityComparer.Equals(item, node.Value))
             {
                 index++;
                 node = node.Next;

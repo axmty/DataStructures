@@ -91,6 +91,13 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2 }, 1, false }
         };
 
+        public static TheoryData<object[], object, int> MemberData_IndexOF => new TheoryData<object[], object, int>
+        {
+            { new object[] { }, 1, -1 },
+            { new object[] { 1, 2, 3 }, null, -1 },
+            { new object[] { null, 2, 3 }, 2, 1 }
+        };
+
         [Theory]
         [MemberData(nameof(MemberData_Add))]
         public void Add_ShouldModifyTheList(object[] initial, object toAdd, object[] expected)
@@ -212,6 +219,16 @@ namespace DataStructures.UnitTests
             {
                 indexing.Should().NotThrow();
             }
+        }
+
+        [Theory]
+        [MemberData(nameof(MemberData_IndexOF))]
+        public void IndexOf_ShouldReturnIndexOfSearchedElementOrMinusOne(object[] initial, object toFind, int index)
+        {
+            var list = this.Build(initial);
+
+            list.IndexOf(toFind).Should().Be(index);
+            this.Compare(list, initial);
         }
 
         private TList Build(object[] items)
