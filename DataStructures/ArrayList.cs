@@ -113,6 +113,9 @@ namespace DataStructures
             return _array[..this.Count].Where(item => match(item));
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public void ForEach(Action<T> action)
         {
             foreach (var item in _array[..this.Count])
@@ -121,11 +124,17 @@ namespace DataStructures
             }
         }
 
+        /// <summary>
+        /// Complexity: O(1).
+        /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
             return _array[..this.Count].Cast<T>().GetEnumerator();
         }
 
+        /// <summary>
+        /// Complexity: O(n).
+        /// </summary>
         public int IndexOf(T item)
         {
             return _array[..this.Count]
