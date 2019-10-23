@@ -94,7 +94,7 @@ namespace DataStructures
         /// </summary>
         public bool Exists(Predicate<T> match)
         {
-            return _array[..this.Count].Exists(match);
+            return _array[..this.Count].Any(item => match(item));
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace DataStructures
         /// </summary>
         public T Find(Predicate<T> match)
         {
-            return _array[..this.Count].Find(match);
+            return _array[..this.Count].FirstOrDefault(item => match(item));
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace DataStructures
         /// </summary>
         public IEnumerable<T> FindAll(Predicate<T> match)
         {
-            return _array[..this.Count].FindAll(match);
+            return _array[..this.Count].Where(item => match(item));
         }
 
         public void ForEach(Action<T> action)

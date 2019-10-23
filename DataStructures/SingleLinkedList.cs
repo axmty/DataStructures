@@ -210,20 +210,6 @@ namespace DataStructures
             return this.GetEnumerator();
         }
 
-        private int FindIndex(int startIndex, SingleNode<T> startNode, Predicate<T> match)
-        {
-            var node = startNode;
-            var index = startIndex;
-
-            while (node != null && !match(node.Value))
-            {
-                node = node.Next;
-                index++;
-            }
-
-            return node != null ? index : -1;
-        }
-
         private SingleNode<T> ReachNode(int index)
         {
             var node = _head;
