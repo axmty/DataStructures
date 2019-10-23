@@ -115,7 +115,10 @@ namespace DataStructures
 
         public void ForEach(Action<T> action)
         {
-            throw new NotImplementedException();
+            foreach (var item in _array[..this.Count])
+            {
+                action(item);
+            }
         }
 
         public IEnumerator<T> GetEnumerator()

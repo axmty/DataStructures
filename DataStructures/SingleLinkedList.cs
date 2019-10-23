@@ -168,7 +168,10 @@ namespace DataStructures
 
         public void ForEach(Action<T> action)
         {
-            throw new NotImplementedException();
+            for (var node = _head; node != null; node = node.Next)
+            {
+                action(node.Value);
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
