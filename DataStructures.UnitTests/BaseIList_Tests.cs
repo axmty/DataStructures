@@ -76,10 +76,10 @@ namespace DataStructures.UnitTests
             { new object[] { 1, null, 5, null }, item => EqualityComparer<object>.Default.Equals(item, null), new object[] { null, null } }
         };
 
-        public static TheoryData<object[], Action<object>, object[]> MemberData_ForEach => new TheoryData<object[], Action<object>, object[]>
+        public static TheoryData<object[], Action<object>> MemberData_ForEach => new TheoryData<object[], Action<object>>
         {
-            { new object[] { }, item => item = (int)item + 1, new Action<object>[] { } },
-            { new object[] { 0, 1, 2 }, item => item = (int)item + 1, new object[] { 1, 2, 3 } }
+            { new object[] { }, item => item = (int)item + 1 },
+            { new object[] { 0, 1, 2 }, item => item = (int)item + 1 }
         };
 
         public static TheoryData<object[], int, bool> MemberData_Indexer => new TheoryData<object[], int, bool>
@@ -183,13 +183,12 @@ namespace DataStructures.UnitTests
 
         [Theory]
         [MemberData(nameof(MemberData_ForEach))]
-        public void ForEach_ShouldInvokeActionForAllTheItems(object[] initial, Action<object> action, object[] expected)
+        public void ForEach_ShouldInvokeActionForAllTheItems(object[] initial, Action<object> action)
         {
             var list = this.Build(initial);
 
             list.ForEach(action);
 
-            list.Should().BeEquivalentTo(expected, options => options.WithStrictOrdering());
             this.Compare(list, initial);
         }
 
