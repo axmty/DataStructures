@@ -4,6 +4,21 @@ namespace DataStructures.Interfaces
 {
     public class ArrayStack<T>
     {
+        private readonly T[] _array;
+        private readonly int _top = 0;
+
+        public ArrayStack(int size)
+        {
+            if (size < 0)
+            {
+                throw new ArgumentOutOfRangeException("Stack size must be strictly positive.");
+            }
+
+            _array = new T[size];
+        }
+
+        public int Size => _array.Length;
+
         public bool IsEmpty()
         {
             throw new NotImplementedException();
