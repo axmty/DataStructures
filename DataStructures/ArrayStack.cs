@@ -5,7 +5,7 @@ namespace DataStructures.Interfaces
     public class ArrayStack<T>
     {
         private readonly T[] _array;
-        private readonly int _top = 0;
+        private int _top = -1;
 
         public ArrayStack(int size)
         {
@@ -21,27 +21,42 @@ namespace DataStructures.Interfaces
 
         public bool IsEmpty()
         {
-            throw new NotImplementedException();
+            return _top < 0;
         }
 
         public bool IsFull()
         {
-            throw new NotImplementedException();
+            return _top >= this.Size - 1;
         }
 
         public T Peek()
         {
-            throw new NotImplementedException();
+            if (this.IsEmpty())
+            {
+                throw new InvalidOperationException("Stack is empty.");
+            }
+
+            return _array[_top];
         }
 
         public T Pop()
         {
-            throw new NotImplementedException();
+            if (this.IsEmpty())
+            {
+                throw new InvalidOperationException("Stack is empty.");
+            }
+
+            return _array[_top--];
         }
 
         public void Push(T item)
         {
-            throw new NotImplementedException();
+            if (this.IsFull())
+            {
+                throw new InvalidOperationException("Stack is full.");
+            }
+
+            _array[++_top] = item;
         }
     }
 }
