@@ -56,19 +56,36 @@ namespace DataStructures
 
         public void InOrder(Action<T> action)
         {
-            void rec(BinaryTreeNode<T> node)
+            //void rec(BinaryTreeNode<T> node)
+            //{
+            //    if (node == null)
+            //    {
+            //        return;
+            //    }
+
+            //    rec(node.Left);
+            //    action(node.Value);
+            //    rec(node.Right);
+            //}
+
+            //rec(_root);
+
+            // ---------- Iterative version
+            var stack = new Stack<BinaryTreeNode<T>>();
+            var node = _root;
+
+            while (node != null || stack.Count > 0)
             {
-                if (node == null)
+                while (node != null)
                 {
-                    return;
+                    stack.Push(node);
+                    node = node.Left;
                 }
 
-                rec(node.Left);
+                node = stack.Pop();
                 action(node.Value);
-                rec(node.Right);
+                node = node.Right;
             }
-
-            rec(_root);
         }
 
         public void PostOrder(Action<T> action)
