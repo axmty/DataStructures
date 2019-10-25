@@ -66,7 +66,7 @@ namespace DataStructures
 
         public void PreOrder(Action<T> action)
         {
-            throw new NotImplementedException();
+            _array.ForEach(item => action(item));
         }
 
         public void Remove(T value)
