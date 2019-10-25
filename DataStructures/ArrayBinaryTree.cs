@@ -26,19 +26,37 @@ namespace DataStructures
 
         public void InOrder(Action<T> action)
         {
-            void rec(int index)
+            // ---------- Recursive version
+            //void rec(int index)
+            //{
+            //    if (index >= _array.Count)
+            //    {
+            //        return;
+            //    }
+
+            //    rec(2 * index + 1);
+            //    action(_array[index]);
+            //    rec(2 * index + 2);
+            //}
+
+            //rec(0);
+
+            // ---------- Iterative version
+            var stack = new Stack<int>();
+            var index = 0;
+
+            while (index < _array.Count || stack.Count > 0)
             {
-                if (index >= _array.Count)
+                while (index < _array.Count)
                 {
-                    return;
+                    stack.Push(index);
+                    index = index * 2 + 1;
                 }
 
-                rec(2 * index + 1);
+                index = stack.Pop();
                 action(_array[index]);
-                rec(2 * index + 2);
+                index = index * 2 + 2;
             }
-
-            rec(0);
         }
 
         public void PostOrder(Action<T> action)
