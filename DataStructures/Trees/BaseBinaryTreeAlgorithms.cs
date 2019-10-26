@@ -8,20 +8,37 @@ namespace DataStructures.Trees
         public void Bfs(Action<T> action)
         {
             // ---------- Recursive version
+            //var queue = new Queue<TNode>();
+            //queue.Enqueue(this.GetRoot());
+            //void rec()
+            //{
+            //    if (!queue.TryDequeue(out var node) || this.IsEmptyNode(node))
+            //    {
+            //        return;
+            //    }
+
+            //    action(this.GetValue(node));
+            //    queue.Enqueue(this.GetLeft(node));
+            //    queue.Enqueue(this.GetRight(node));
+            //    rec();
+            //}
+            //rec();
+
+            // ---------- Recursive version
             var queue = new Queue<TNode>();
             queue.Enqueue(this.GetRoot());
-            void rec()
+
+            while (queue.TryDequeue(out var node))
             {
-                if (!queue.TryDequeue(out var node))
+                if (this.IsEmptyNode(node))
                 {
-                    return;
+                    continue;
                 }
 
+                action(this.GetValue(node));
                 queue.Enqueue(this.GetLeft(node));
                 queue.Enqueue(this.GetRight(node));
-                rec();
             }
-            rec();
         }
 
         public void InOrder(Action<T> action)
