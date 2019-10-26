@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataStructures.Interfaces
+namespace DataStructures.Lists
 {
     public interface IList<T> : System.Collections.Generic.IList<T>
     {

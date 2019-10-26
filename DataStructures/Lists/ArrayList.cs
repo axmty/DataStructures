@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DataStructures.Extensions;
 
-namespace DataStructures
+namespace DataStructures.Lists
 {
-    public class ArrayList<T> : Interfaces.IList<T>
+    public class ArrayList<T> : IList<T>
     {
         private T[] _array = new T[0];
 

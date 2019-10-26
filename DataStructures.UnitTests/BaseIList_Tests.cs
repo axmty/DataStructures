@@ -13,7 +13,7 @@ namespace DataStructures.UnitTests
     /// The implementation of <see cref="Interfaces.IList{T}"/> to unit test.
     /// </typeparam>
     public abstract class BaseIList_Tests<TList>
-        where TList : Interfaces.IList<object>, new()
+        where TList : DataStructures.Lists.IList<object>, new()
     {
         public static TheoryData<object[], object, object[]> MemberData_Add => new TheoryData<object[], object, object[]>
         {

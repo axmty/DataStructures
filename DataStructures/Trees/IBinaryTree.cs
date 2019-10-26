@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataStructures.Interfaces
+namespace DataStructures.Trees
 {
     public interface IBinaryTree<T>
     {

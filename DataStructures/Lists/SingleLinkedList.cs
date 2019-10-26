@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using DataStructures.Nodes;
 
-namespace DataStructures
+namespace DataStructures.Lists
 {
-    public class SingleLinkedList<T> : Interfaces.IList<T>
+    public class SingleLinkedList<T> : IList<T>
     {
         private SingleNode<T> _head;
         private SingleNode<T> _tail;

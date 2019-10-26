@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using DataStructures.Trees;
 using FluentAssertions;
 using Xunit;
 
@@ -12,7 +13,7 @@ namespace DataStructures.UnitTests
     /// The implementation of <see cref="Interfaces.IBinaryTree{T}"/> to unit test.
     /// </typeparam>
     public abstract class BaseIBinaryTree_Tests<TTree>
-        where TTree : Interfaces.IBinaryTree<object>, new()
+        where TTree : IBinaryTree<object>, new()
     {
         public static TheoryData<object[], string> MemberData_InOrderTraversal => new TheoryData<object[], string>
         {

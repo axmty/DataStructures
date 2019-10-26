@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DataStructures.Interfaces;
 using DataStructures.Nodes;
 
-namespace DataStructures
+namespace DataStructures.Trees
 {
     public class LinkedListBinaryTree<T> : IBinaryTree<T>
     {

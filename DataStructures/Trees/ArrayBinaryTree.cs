@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataStructures.Interfaces;
 
-namespace DataStructures
+namespace DataStructures.Trees
 {
     public class ArrayBinaryTree<T> : IBinaryTree<T>
     {
-        private readonly ArrayList<T> _array = new ArrayList<T>();
+        private readonly List<T> _array = new List<T>();
 
         public void Add(T value)
         {
@@ -86,9 +85,9 @@ namespace DataStructures
 
         private class ArrayBinaryTreeAlgorithms : BaseBinaryTreeAlgorithms<T, int>
         {
-            private readonly ArrayList<T> _array;
+            private readonly List<T> _array;
 
-            public ArrayBinaryTreeAlgorithms(ArrayList<T> array)
+            public ArrayBinaryTreeAlgorithms(List<T> array)
             {
                 _array = array;
             }
