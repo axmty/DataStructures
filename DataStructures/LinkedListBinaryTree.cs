@@ -50,36 +50,7 @@ namespace DataStructures
 
         public void InOrder(Action<T> action)
         {
-            //void rec(BinaryTreeNode<T> node)
-            //{
-            //    if (node == null)
-            //    {
-            //        return;
-            //    }
-
-            //    rec(node.Left);
-            //    action(node.Value);
-            //    rec(node.Right);
-            //}
-
-            //rec(_root);
-
-            // ---------- Iterative version
-            var stack = new Stack<BinaryTreeNode<T>>();
-            var node = _root;
-
-            while (node != null || stack.Count > 0)
-            {
-                while (node != null)
-                {
-                    stack.Push(node);
-                    node = node.Left;
-                }
-
-                node = stack.Pop();
-                action(node.Value);
-                node = node.Right;
-            }
+            (new LinkedListBinaryTreeAlgorithms(_root)).InOrder(action);
         }
 
         public void PostOrder(Action<T> action)
@@ -124,39 +95,32 @@ namespace DataStructures
 
         public void PreOrder(Action<T> action)
         {
-            // ---------- Recursive version
-            //void rec(BinaryTreeNode<T> node)
-            //{
-            //    if (node == null)
-            //    {
-            //        return;
-            //    }
-
-            //    action(node.Value);
-            //}
-
-            //rec(_root);
-
-            // ---------- Iterative version
-            var stack = new Stack<BinaryTreeNode<T>>();
-            var node = _root;
-
-            while (node != null || stack.Count > 0)
-            {
-                while (node != null)
-                {
-                    stack.Push(node);
-                    action(node.Value);
-                    node = node.Left;
-                }
-
-                node = stack.Pop().Right;
-            }
+            (new LinkedListBinaryTreeAlgorithms(_root)).PreOrder(action);
         }
 
         public void Remove(T value)
         {
             throw new NotImplementedException();
+        }
+
+        private class LinkedListBinaryTreeAlgorithms : BaseBinaryTreeAlgorithms<T, BinaryTreeNode<T>>
+        {
+            private readonly BinaryTreeNode<T> _root;
+
+            public LinkedListBinaryTreeAlgorithms(BinaryTreeNode<T> root)
+            {
+                _root = root;
+            }
+
+            protected override BinaryTreeNode<T> GetLeft(BinaryTreeNode<T> node) => node.Left;
+
+            protected override BinaryTreeNode<T> GetRight(BinaryTreeNode<T> node) => node.Right;
+
+            protected override BinaryTreeNode<T> GetRoot() => _root;
+
+            protected override T GetValue(BinaryTreeNode<T> node) => node.Value;
+
+            protected override bool IsEmptyNode(BinaryTreeNode<T> node) => node == null;
         }
     }
 }

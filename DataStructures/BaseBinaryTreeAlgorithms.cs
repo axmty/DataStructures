@@ -2,7 +2,7 @@
 
 namespace DataStructures
 {
-    internal abstract class BinaryTreeAlgorithms<T, TNode>
+    internal abstract class BaseBinaryTreeAlgorithms<T, TNode>
     {
         public void InOrder(Action<T> action)
         {
@@ -36,6 +36,40 @@ namespace DataStructures
             //    node = stack.Pop();
             //    action(this.GetValue(node));
             //    node = this.GetRight(node);
+            //}
+        }
+
+        public void PreOrder(Action<T> action)
+        {
+            // ---------- Recursive version
+            void rec(TNode node)
+            {
+                if (this.IsEmptyNode(node))
+                {
+                    return;
+                }
+
+                action(this.GetValue(node));
+                rec(this.GetLeft(node));
+                rec(this.GetRight(node));
+            }
+
+            rec(this.GetRoot());
+
+            // ---------- Iterative version
+            //var stack = new Stack<int>();
+            //var index = 0;
+
+            //while (index < _array.Count || stack.Count > 0)
+            //{
+            //    while (index < _array.Count)
+            //    {
+            //        stack.Push(index);
+            //        action(_array[index]);
+            //        index = index * 2 + 1;
+            //    }
+
+            //    index = stack.Pop() * 2 + 2;
             //}
         }
 

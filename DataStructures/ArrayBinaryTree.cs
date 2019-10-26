@@ -21,38 +21,6 @@ namespace DataStructures
         public void InOrder(Action<T> action)
         {
             (new ArrayBinaryTreeAlgorithms(_array)).InOrder(action);
-
-            // ---------- Recursive version
-            ////void rec(int index)
-            ////{
-            ////    if (index >= _array.Count)
-            ////    {
-            ////        return;
-            ////    }
-
-            ////    rec(2 * index + 1);
-            ////    action(_array[index]);
-            ////    rec(2 * index + 2);
-            ////}
-
-            ////rec(0);
-
-            //// ---------- Iterative version
-            //var stack = new Stack<int>();
-            //var index = 0;
-
-            //while (index < _array.Count || stack.Count > 0)
-            //{
-            //    while (index < _array.Count)
-            //    {
-            //        stack.Push(index);
-            //        index = index * 2 + 1;
-            //    }
-
-            //    index = stack.Pop();
-            //    action(_array[index]);
-            //    index = index * 2 + 2;
-            //}
         }
 
         public void PostOrder(Action<T> action)
@@ -98,36 +66,7 @@ namespace DataStructures
 
         public void PreOrder(Action<T> action)
         {
-            // ---------- Recursive version
-            //void rec(int index)
-            //{
-            //    if (index >= _array.Count)
-            //    {
-            //        return;
-            //    }
-
-            //    action(_array[index]);
-            //    rec(2 * index + 1);
-            //    rec(2 * index + 2);
-            //}
-
-            //rec(0);
-
-            // ---------- Iterative version
-            var stack = new Stack<int>();
-            var index = 0;
-
-            while (index < _array.Count || stack.Count > 0)
-            {
-                while (index < _array.Count)
-                {
-                    stack.Push(index);
-                    action(_array[index]);
-                    index = index * 2 + 1;
-                }
-
-                index = stack.Pop() * 2 + 2;
-            }
+            (new ArrayBinaryTreeAlgorithms(_array)).PreOrder(action);
         }
 
         public void Remove(T value)
@@ -135,7 +74,7 @@ namespace DataStructures
             throw new NotImplementedException();
         }
 
-        private class ArrayBinaryTreeAlgorithms : BinaryTreeAlgorithms<T, int>
+        private class ArrayBinaryTreeAlgorithms : BaseBinaryTreeAlgorithms<T, int>
         {
             private readonly ArrayList<T> _array;
 
