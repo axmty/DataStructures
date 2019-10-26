@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DataStructures
 {
@@ -42,35 +43,36 @@ namespace DataStructures
         public void PreOrder(Action<T> action)
         {
             // ---------- Recursive version
-            void rec(TNode node)
-            {
-                if (this.IsEmptyNode(node))
-                {
-                    return;
-                }
-
-                action(this.GetValue(node));
-                rec(this.GetLeft(node));
-                rec(this.GetRight(node));
-            }
-
-            rec(this.GetRoot());
-
-            // ---------- Iterative version
-            //var stack = new Stack<int>();
-            //var index = 0;
-
-            //while (index < _array.Count || stack.Count > 0)
+            //void rec(TNode node)
             //{
-            //    while (index < _array.Count)
+            //    if (this.IsEmptyNode(node))
             //    {
-            //        stack.Push(index);
-            //        action(_array[index]);
-            //        index = index * 2 + 1;
+            //        return;
             //    }
 
-            //    index = stack.Pop() * 2 + 2;
+            //    action(this.GetValue(node));
+            //    rec(this.GetLeft(node));
+            //    rec(this.GetRight(node));
             //}
+
+            //rec(this.GetRoot());
+
+            // ---------- Iterative version
+            var stack = new Stack<TNode>();
+            var node = this.GetRoot();
+
+            while (!this.IsEmptyNode(node) || stack.Count > 0)
+            {
+                while (!this.IsEmptyNode(node))
+                {
+                    stack.Push(node);
+                    action(this.GetValue(node));
+                    node = this.GetLeft(node);
+                }
+
+                node = stack.Pop();
+                node = this.GetRight(node);
+            }
         }
 
         protected abstract TNode GetLeft(TNode node);
