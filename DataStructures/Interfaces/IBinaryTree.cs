@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DataStructures.Interfaces
 {
-    public interface IBinaryTree<T> : IEnumerable<T>
+    public interface IBinaryTree<T>
     {
         void Add(T value);
 

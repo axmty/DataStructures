@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using DataStructures.Interfaces;
 using DataStructures.Nodes;
@@ -45,11 +44,6 @@ namespace DataStructures
         }
 
         public IBinaryTree<T> Copy()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
         }
@@ -126,11 +120,6 @@ namespace DataStructures
         }
 
         public void Remove(T value)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
         }
