@@ -7,6 +7,8 @@ namespace DataStructures.Trees
     {
         private readonly List<T> _array = new List<T>();
 
+        private ArrayBinaryTreeAlgorithms Algorithms => new ArrayBinaryTreeAlgorithms(_array);
+
         public void Add(T value)
         {
             _array.Add(value);
@@ -14,7 +16,7 @@ namespace DataStructures.Trees
 
         public void Bfs(Action<T> action)
         {
-            throw new NotImplementedException();
+            this.Algorithms.Bfs(action);
         }
 
         public IBinaryTree<T> Copy()
@@ -24,17 +26,17 @@ namespace DataStructures.Trees
 
         public void InOrder(Action<T> action)
         {
-            (new ArrayBinaryTreeAlgorithms(_array)).InOrder(action);
+            this.Algorithms.InOrder(action);
         }
 
         public void PostOrder(Action<T> action)
         {
-            (new ArrayBinaryTreeAlgorithms(_array)).PostOrder(action);
+            this.Algorithms.PostOrder(action);
         }
 
         public void PreOrder(Action<T> action)
         {
-            (new ArrayBinaryTreeAlgorithms(_array)).PreOrder(action);
+            this.Algorithms.PreOrder(action);
         }
 
         public void Remove(T value)

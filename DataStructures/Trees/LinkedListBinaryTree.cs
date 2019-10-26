@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataStructures.Interfaces;
 using DataStructures.Nodes;
 
 namespace DataStructures.Trees
@@ -8,6 +7,8 @@ namespace DataStructures.Trees
     public class LinkedListBinaryTree<T> : IBinaryTree<T>
     {
         private BinaryTreeNode<T> _root = null;
+
+        private LinkedListBinaryTreeAlgorithms Algorithms => new LinkedListBinaryTreeAlgorithms(_root);
 
         public void Add(T value)
         {
@@ -45,7 +46,7 @@ namespace DataStructures.Trees
 
         public void Bfs(Action<T> action)
         {
-            throw new NotImplementedException();
+            this.Algorithms.Bfs(action);
         }
 
         public IBinaryTree<T> Copy()
@@ -55,17 +56,17 @@ namespace DataStructures.Trees
 
         public void InOrder(Action<T> action)
         {
-            (new LinkedListBinaryTreeAlgorithms(_root)).InOrder(action);
+            this.Algorithms.InOrder(action);
         }
 
         public void PostOrder(Action<T> action)
         {
-            (new LinkedListBinaryTreeAlgorithms(_root)).PostOrder(action);
+            this.Algorithms.PostOrder(action);
         }
 
         public void PreOrder(Action<T> action)
         {
-            (new LinkedListBinaryTreeAlgorithms(_root)).PreOrder(action);
+            this.Algorithms.PreOrder(action);
         }
 
         public void Remove(T value)
