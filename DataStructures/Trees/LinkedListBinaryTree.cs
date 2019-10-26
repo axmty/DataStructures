@@ -65,42 +65,7 @@ namespace DataStructures.Trees
 
         public void PostOrder(Action<T> action)
         {
-            // ---------- Recursive version
-            //void rec(BinaryTreeNode<T> node)
-            //{
-            //    if (node == null)
-            //    {
-            //        return;
-            //    }
-
-            //    rec(node.Left);
-            //    rec(node.Right);
-            //    action(node.Value);
-            //}
-
-            //rec(_root);
-
-            // ---------- Iterative version
-            var stack1 = new Stack<BinaryTreeNode<T>>();
-            var stack2 = new Stack<BinaryTreeNode<T>>();
-            stack1.Push(_root);
-
-            while (stack1.TryPop(out var node))
-            {
-                if (node == null)
-                {
-                    continue;
-                }
-
-                stack2.Push(node);
-                stack1.Push(node.Left);
-                stack1.Push(node.Right);
-            }
-
-            foreach (var node in stack2)
-            {
-                action(node.Value);
-            }
+            (new LinkedListBinaryTreeAlgorithms(_root)).PostOrder(action);
         }
 
         public void PreOrder(Action<T> action)

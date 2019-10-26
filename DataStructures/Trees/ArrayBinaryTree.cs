@@ -34,43 +34,7 @@ namespace DataStructures.Trees
 
         public void PostOrder(Action<T> action)
         {
-            // ---------- Recursive version
-            //void rec(int index)
-            //{
-            //    if (index >= _array.Count)
-            //    {
-            //        return;
-            //    }
-
-            //    rec(index * 2 + 1);
-            //    rec(index * 2 + 2);
-            //    action(_array[index]);
-            //}
-
-            //rec(0);
-
-            // ---------- Iterative version
-            var stack1 = new Stack<int>();
-            var stack2 = new Stack<int>();
-
-            stack1.Push(0);
-
-            while (stack1.TryPop(out var index))
-            {
-                if (index >= _array.Count)
-                {
-                    continue;
-                }
-
-                stack2.Push(index);
-                stack1.Push(index * 2 + 1);
-                stack1.Push(index * 2 + 2);
-            }
-
-            foreach (var index in stack2)
-            {
-                action(_array[index]);
-            }
+            (new ArrayBinaryTreeAlgorithms(_array)).PostOrder(action);
         }
 
         public void PreOrder(Action<T> action)
