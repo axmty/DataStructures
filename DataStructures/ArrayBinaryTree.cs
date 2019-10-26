@@ -20,37 +20,39 @@ namespace DataStructures
 
         public void InOrder(Action<T> action)
         {
+            (new ArrayBinaryTreeAlgorithms(_array)).InOrder(action);
+
             // ---------- Recursive version
-            //void rec(int index)
+            ////void rec(int index)
+            ////{
+            ////    if (index >= _array.Count)
+            ////    {
+            ////        return;
+            ////    }
+
+            ////    rec(2 * index + 1);
+            ////    action(_array[index]);
+            ////    rec(2 * index + 2);
+            ////}
+
+            ////rec(0);
+
+            //// ---------- Iterative version
+            //var stack = new Stack<int>();
+            //var index = 0;
+
+            //while (index < _array.Count || stack.Count > 0)
             //{
-            //    if (index >= _array.Count)
+            //    while (index < _array.Count)
             //    {
-            //        return;
+            //        stack.Push(index);
+            //        index = index * 2 + 1;
             //    }
 
-            //    rec(2 * index + 1);
+            //    index = stack.Pop();
             //    action(_array[index]);
-            //    rec(2 * index + 2);
+            //    index = index * 2 + 2;
             //}
-
-            //rec(0);
-
-            // ---------- Iterative version
-            var stack = new Stack<int>();
-            var index = 0;
-
-            while (index < _array.Count || stack.Count > 0)
-            {
-                while (index < _array.Count)
-                {
-                    stack.Push(index);
-                    index = index * 2 + 1;
-                }
-
-                index = stack.Pop();
-                action(_array[index]);
-                index = index * 2 + 2;
-            }
         }
 
         public void PostOrder(Action<T> action)
@@ -131,6 +133,26 @@ namespace DataStructures
         public void Remove(T value)
         {
             throw new NotImplementedException();
+        }
+
+        private class ArrayBinaryTreeAlgorithms : BinaryTreeAlgorithms<T, int>
+        {
+            private readonly ArrayList<T> _array;
+
+            public ArrayBinaryTreeAlgorithms(ArrayList<T> array)
+            {
+                _array = array;
+            }
+
+            protected override int GetLeft(int node) => node * 2 + 1;
+
+            protected override int GetRight(int node) => node * 2 + 2;
+
+            protected override int GetRoot() => 0;
+
+            protected override T GetValue(int node) => _array[node];
+
+            protected override bool IsEmptyNode(int node) => node >= _array.Count;
         }
     }
 }
