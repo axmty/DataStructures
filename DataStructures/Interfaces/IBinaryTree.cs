@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DataStructures.Interfaces
 {
@@ -7,7 +6,11 @@ namespace DataStructures.Interfaces
     {
         void Add(T value);
 
+        void BFS(Action<T> action);
+
         IBinaryTree<T> Copy();
+
+        void DFS(Action<T> action);
 
         void InOrder(Action<T> action);
 

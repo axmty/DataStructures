@@ -43,7 +43,17 @@ namespace DataStructures
             }
         }
 
+        public void BFS(Action<T> action)
+        {
+            throw new NotImplementedException();
+        }
+
         public IBinaryTree<T> Copy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DFS(Action<T> action)
         {
             throw new NotImplementedException();
         }
