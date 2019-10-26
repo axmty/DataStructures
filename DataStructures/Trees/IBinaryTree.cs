@@ -6,11 +6,9 @@ namespace DataStructures.Trees
     {
         void Add(T value);
 
-        void BFS(Action<T> action);
+        void Bfs(Action<T> action);
 
         IBinaryTree<T> Copy();
-
-        void DFS(Action<T> action);
 
         void InOrder(Action<T> action);
 

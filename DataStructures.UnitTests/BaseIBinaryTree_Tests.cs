@@ -15,6 +15,23 @@ namespace DataStructures.UnitTests
     public abstract class BaseIBinaryTree_Tests<TTree>
         where TTree : IBinaryTree<object>, new()
     {
+        /*
+
+            Tree (1 2 3 4 5 6 7) :
+
+                      1
+                  2       3
+                4   5   6   7
+
+        */
+
+        public static TheoryData<object[], string> MemberData_Bfs => new TheoryData<object[], string>
+        {
+            { new object[] { }, string.Empty },
+            { new object[] { 1, 2, 3 }, "1 2 3" },
+            { new object[] { 1, 2, 3, 4, 5, 6, 7 }, "1 2 3 4 5 6 7" }
+        };
+
         public static TheoryData<object[], string> MemberData_InOrderTraversal => new TheoryData<object[], string>
         {
             { new object[] { }, string.Empty },
@@ -35,6 +52,13 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, 3 }, "1 2 3" },
             { new object[] { 1, 2, 3, 4, 5, 6, 7 }, "1 2 4 5 3 6 7" }
         };
+
+        [Theory]
+        [MemberData(nameof(MemberData_Bfs))]
+        public void Bfs_ShouldInvokeActionInABfsTraversal(object[] values, string traversalExpectedString)
+        {
+            this.TestOrderMethod(tree => tree.Bfs, values, traversalExpectedString);
+        }
 
         [Theory]
         [MemberData(nameof(MemberData_InOrderTraversal))]

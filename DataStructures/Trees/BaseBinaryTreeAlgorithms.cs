@@ -14,7 +14,6 @@ namespace DataStructures.Trees
             //    {
             //        return;
             //    }
-
             //    rec(this.GetLeft(node));
             //    action(this.GetValue(node));
             //    rec(this.GetRight(node));
@@ -48,7 +47,6 @@ namespace DataStructures.Trees
             //    {
             //        return;
             //    }
-
             //    rec(this.GetLeft(node));
             //    rec(this.GetRight(node));
             //    action(this.GetValue(node));
@@ -88,7 +86,6 @@ namespace DataStructures.Trees
             //    {
             //        return;
             //    }
-
             //    action(this.GetValue(node));
             //    rec(this.GetLeft(node));
             //    rec(this.GetRight(node));
