@@ -95,7 +95,18 @@ namespace DataStructures
 
         public void PreOrder(Action<T> action)
         {
-            throw new NotImplementedException();
+            // Recursive version
+            void rec(BinaryTreeNode<T> node)
+            {
+                if (node == null)
+                {
+                    return;
+                }
+
+                action(node.Value);
+            }
+
+            rec(_root);
         }
 
         public void Remove(T value)

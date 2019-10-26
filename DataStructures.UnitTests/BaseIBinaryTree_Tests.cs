@@ -25,7 +25,7 @@ namespace DataStructures.UnitTests
         {
             { new object[] { }, string.Empty },
             { new object[] { 1, 2, 3 }, "1 2 3" },
-            { new object[] { 1, 2, 3, 4, 5, 6, 7 }, "1 2 3 4 5 6 7" }
+            { new object[] { 1, 2, 3, 4, 5, 6, 7 }, "1 2 4 5 3 6 7" }
         };
 
         [Theory]

@@ -66,7 +66,36 @@ namespace DataStructures
 
         public void PreOrder(Action<T> action)
         {
-            _array.ForEach(item => action(item));
+            // ---------- Recursive version
+            //void rec(int index)
+            //{
+            //    if (index >= _array.Count)
+            //    {
+            //        return;
+            //    }
+
+            //    action(_array[index]);
+            //    rec(2 * index + 1);
+            //    rec(2 * index + 2);
+            //}
+
+            //rec(0);
+
+            // ---------- Iterative version
+            var stack = new Stack<int>();
+            var index = 0;
+
+            while (index < _array.Count || stack.Count > 0)
+            {
+                while (index < _array.Count)
+                {
+                    stack.Push(index);
+                    action(_array[index]);
+                    index = index * 2 + 1;
+                }
+
+                index = stack.Pop() * 2 + 2;
+            }
         }
 
         public void Remove(T value)
