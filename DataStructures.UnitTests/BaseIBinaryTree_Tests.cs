@@ -21,6 +21,13 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, 3, 4, 5, 6, 7 }, "4 2 5 1 6 3 7" }
         };
 
+        public static TheoryData<object[], string> MemberData_PostOrderTraversal => new TheoryData<object[], string>
+        {
+            { new object[] { }, string.Empty },
+            { new object[] { 1, 2, 3 }, "2 3 1" },
+            { new object[] { 1, 2, 3, 4, 5, 6, 7 }, "4 5 2 6 7 3 1" }
+        };
+
         public static TheoryData<object[], string> MemberData_PreOrderTraversal => new TheoryData<object[], string>
         {
             { new object[] { }, string.Empty },
@@ -36,8 +43,15 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
+        [MemberData(nameof(MemberData_PostOrderTraversal))]
+        public void PostOrder_ShouldInvokeActionInAPostOrderTraversal(object[] values, string traversalExpectedString)
+        {
+            this.TestOrderMethod(tree => tree.PostOrder, values, traversalExpectedString);
+        }
+
+        [Theory]
         [MemberData(nameof(MemberData_PreOrderTraversal))]
-        public void PreOrder_ShouldInvokeActionInAnPreOrderTraversal(object[] values, string traversalExpectedString)
+        public void PreOrder_ShouldInvokeActionInAPreOrderTraversal(object[] values, string traversalExpectedString)
         {
             this.TestOrderMethod(tree => tree.PreOrder, values, traversalExpectedString);
         }
