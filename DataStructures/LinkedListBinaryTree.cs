@@ -95,18 +95,34 @@ namespace DataStructures
 
         public void PreOrder(Action<T> action)
         {
-            // Recursive version
-            void rec(BinaryTreeNode<T> node)
+            // ---------- Recursive version
+            //void rec(BinaryTreeNode<T> node)
+            //{
+            //    if (node == null)
+            //    {
+            //        return;
+            //    }
+
+            //    action(node.Value);
+            //}
+
+            //rec(_root);
+
+            // ---------- Iterative version
+            var stack = new Stack<BinaryTreeNode<T>>();
+            var node = _root;
+
+            while (node != null || stack.Count > 0)
             {
-                if (node == null)
+                while (node != null)
                 {
-                    return;
+                    stack.Push(node);
+                    action(node.Value);
+                    node = node.Left;
                 }
 
-                action(node.Value);
+                node = stack.Pop().Right;
             }
-
-            rec(_root);
         }
 
         public void Remove(T value)
