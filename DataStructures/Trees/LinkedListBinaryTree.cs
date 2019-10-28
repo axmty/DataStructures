@@ -6,23 +6,23 @@ namespace DataStructures.Trees
 {
     public class LinkedListBinaryTree<T> : IBinaryTree<T>
     {
-        private BinaryTreeNode<T> _root = null;
+        protected BinaryTreeNode<T> Root { get; private set; } = null;
 
-        private LinkedListBinaryTreeAlgorithms Algorithms => new LinkedListBinaryTreeAlgorithms(_root);
+        private LinkedListBinaryTreeAlgorithms Algorithms => new LinkedListBinaryTreeAlgorithms(Root);
 
         public virtual void Add(T value)
         {
             var newNode = new BinaryTreeNode<T>(value);
 
-            if (_root == null)
+            if (Root == null)
             {
-                _root = newNode;
+                Root = newNode;
             }
             else
             {
                 var queue = new Queue<BinaryTreeNode<T>>();
 
-                queue.Enqueue(_root);
+                queue.Enqueue(Root);
                 while (queue.TryDequeue(out var node))
                 {
                     if (node.Left == null)

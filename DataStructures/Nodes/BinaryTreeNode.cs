@@ -1,6 +1,6 @@
 ﻿namespace DataStructures.Nodes
 {
-    internal class BinaryTreeNode<T>
+    public class BinaryTreeNode<T>
     {
         public BinaryTreeNode(T value)
         {
