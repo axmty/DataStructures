@@ -57,50 +57,28 @@ namespace DataStructures.UnitTests
         [MemberData(nameof(MemberData_Bfs))]
         public void Bfs_ShouldInvokeActionInABfsTraversal(object[] values, string traversalExpectedString)
         {
-            this.TestOrderMethod(tree => tree.Bfs, values, traversalExpectedString);
+            BinaryTreeHelpers.TestOrderMethod<TTree, object>(tree => tree.Bfs, values, traversalExpectedString);
         }
 
         [Theory]
         [MemberData(nameof(MemberData_InOrderTraversal))]
         public void InOrder_ShouldInvokeActionInAnInOrderTraversal(object[] values, string traversalExpectedString)
         {
-            this.TestOrderMethod(tree => tree.InOrder, values, traversalExpectedString);
+            BinaryTreeHelpers.TestOrderMethod<TTree, object>(tree => tree.InOrder, values, traversalExpectedString);
         }
 
         [Theory]
         [MemberData(nameof(MemberData_PostOrderTraversal))]
         public void PostOrder_ShouldInvokeActionInAPostOrderTraversal(object[] values, string traversalExpectedString)
         {
-            this.TestOrderMethod(tree => tree.PostOrder, values, traversalExpectedString);
+            BinaryTreeHelpers.TestOrderMethod<TTree, object>(tree => tree.PostOrder, values, traversalExpectedString);
         }
 
         [Theory]
         [MemberData(nameof(MemberData_PreOrderTraversal))]
         public void PreOrder_ShouldInvokeActionInAPreOrderTraversal(object[] values, string traversalExpectedString)
         {
-            this.TestOrderMethod(tree => tree.PreOrder, values, traversalExpectedString);
-        }
-
-        private TTree Build(object[] values)
-        {
-            var tree = new TTree();
-
-            foreach (var value in values)
-            {
-                tree.Add(value);
-            }
-
-            return tree;
-        }
-
-        private void TestOrderMethod(Func<TTree, Action<Action<object>>> orderMethodSelector, object[] values, string traversalExpectedString)
-        {
-            var tree = this.Build(values);
-            var toString = new StringBuilder();
-
-            orderMethodSelector(tree)((item) => toString.Append($" {item}"));
-
-            toString.ToString().Trim().Should().Be(traversalExpectedString);
+            BinaryTreeHelpers.TestOrderMethod<TTree, object>(tree => tree.PreOrder, values, traversalExpectedString);
         }
     }
 }
