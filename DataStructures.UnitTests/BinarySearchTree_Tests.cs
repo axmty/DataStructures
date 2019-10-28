@@ -31,6 +31,30 @@ namespace DataStructures.UnitTests
         };
 
         [Fact]
+        public void Add_ShouldAddItemsInKeyOrder()
+        {
+            var tree = new BinarySearchTree<int>();
+
+            tree.Add(4);
+            tree.Add(2);
+            tree.Add(1);
+            tree.Add(3);
+            tree.Add(7);
+            tree.Add(6);
+            tree.Add(5);
+
+            var root = tree.Root;
+
+            root.Value.Should().Be(4);
+            root.Left.Value.Should().Be(2);
+            root.Left.Left.Value.Should().Be(1);
+            root.Left.Right.Value.Should().Be(3);
+            root.Right.Value.Should().Be(7);
+            root.Right.Left.Value.Should().Be(6);
+            root.Right.Left.Left.Value.Should().Be(5);
+        }
+
+        [Fact]
         public void Add_ShouldThrowInvalidOperationException_WhenKeyIsNotUnique()
         {
             var tree = new BinarySearchTree<int>();
