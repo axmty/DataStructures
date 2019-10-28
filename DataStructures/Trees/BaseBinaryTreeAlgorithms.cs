@@ -16,7 +16,6 @@ namespace DataStructures.Trees
             //    {
             //        return;
             //    }
-
             //    action(this.GetValue(node));
             //    queue.Enqueue(this.GetLeft(node));
             //    queue.Enqueue(this.GetRight(node));

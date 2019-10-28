@@ -10,7 +10,7 @@ namespace DataStructures.Trees
 
         private LinkedListBinaryTreeAlgorithms Algorithms => new LinkedListBinaryTreeAlgorithms(_root);
 
-        public void Add(T value)
+        public virtual void Add(T value)
         {
             var newNode = new BinaryTreeNode<T>(value);
 
@@ -69,7 +69,7 @@ namespace DataStructures.Trees
             this.Algorithms.PreOrder(action);
         }
 
-        public void Remove(T value)
+        public virtual void Remove(T value)
         {
             throw new NotImplementedException();
         }
