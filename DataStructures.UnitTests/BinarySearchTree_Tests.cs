@@ -1,3 +1,4 @@
+using System;
 using DataStructures.Trees;
 using FluentAssertions;
 using Xunit;
@@ -28,6 +29,16 @@ namespace DataStructures.UnitTests
             { new int[] { 4, 2, 1, 6, 3, 5, 7 }, 2, true },
             { new int[] { 1, 2, 3, 4, 5, 6, 7 }, 8, false }
         };
+
+        [Fact]
+        public void Add_ShouldThrowInvalidOperationException_WhenKeyIsNotUnique()
+        {
+            var tree = new BinarySearchTree<int>();
+
+            tree.Add(1);
+
+            FluentActions.Invoking(() => tree.Add(1)).Should().Throw<InvalidOperationException>();
+        }
 
         [Theory]
         [MemberData(nameof(MemberData_Bfs))]
