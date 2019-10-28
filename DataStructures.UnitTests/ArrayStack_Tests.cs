@@ -1,5 +1,5 @@
 using System;
-using DataStructures.Interfaces;
+using DataStructures.Stacks;
 using FluentAssertions;
 using Xunit;
 
