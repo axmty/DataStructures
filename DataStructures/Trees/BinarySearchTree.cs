@@ -1,4 +1,5 @@
 ﻿using System;
+using DataStructures.Nodes;
 
 namespace DataStructures.Trees
 {
@@ -7,7 +8,49 @@ namespace DataStructures.Trees
     {
         public override void Add(T value)
         {
-            base.Add(value);
+            var newNode = new BinaryTreeNode<T>(value);
+
+            if (this.Root == null)
+            {
+                this.Root = newNode;
+                return;
+            }
+
+            var node = this.Root;
+
+            while (node != null)
+            {
+                var compare = node.Value.CompareTo(value);
+
+                if (compare == 0)
+                {
+                    throw new InvalidOperationException($"Key {value} must be unique.");
+                }
+                else if (compare < 0)
+                {
+                    if (node.Right == null)
+                    {
+                        node.Right = newNode;
+                        return;
+                    }
+                    else
+                    {
+                        node = node.Right;
+                    }
+                }
+                else if (compare > 0)
+                {
+                    if (node.Left == null)
+                    {
+                        node.Left = newNode;
+                        return;
+                    }
+                    else
+                    {
+                        node = node.Left;
+                    }
+                }
+            }
         }
 
         public override void Remove(T value)

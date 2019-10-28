@@ -6,7 +6,7 @@ namespace DataStructures.Trees
 {
     public class LinkedListBinaryTree<T> : IBinaryTree<T>
     {
-        protected BinaryTreeNode<T> Root { get; private set; } = null;
+        protected BinaryTreeNode<T> Root { get; set; } = null;
 
         private LinkedListBinaryTreeAlgorithms Algorithms => new LinkedListBinaryTreeAlgorithms(Root);
 
