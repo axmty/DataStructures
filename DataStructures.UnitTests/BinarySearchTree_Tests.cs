@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using DataStructures.Trees;
 using FluentAssertions;
 using Xunit;
@@ -71,6 +72,40 @@ namespace DataStructures.UnitTests
             var tree = BinaryTreeHelpers.Build<BinarySearchTree<int>, int>(values);
 
             BinaryTreeHelpers.TestOrderMethod<BinarySearchTree<int>, int>(tree => tree.Bfs, values, traversalExpectedString);
+        }
+
+        [Fact]
+        public void Remove_ShouldRemoveItemFromTheTree()
+        {
+            var tree = new BinarySearchTree<int>();
+
+            tree.Add(4);
+            tree.Add(2);
+            tree.Add(1);
+            tree.Add(3);
+            tree.Add(7);
+            tree.Add(6);
+            tree.Add(5);
+            tree.Remove(2);
+
+            var root = tree.Root;
+
+            root.Value.Should().Be(4);
+            root.Left.Value.Should().Be(1);
+            root.Left.Right.Value.Should().Be(3);
+            root.Right.Value.Should().Be(7);
+            root.Right.Left.Value.Should().Be(6);
+            root.Right.Left.Left.Value.Should().Be(5);
+        }
+
+        [Fact]
+        public void Remove_ShouldThrowKeyNotFoundException()
+        {
+            var tree = new BinarySearchTree<int>();
+
+            tree.Add(4);
+
+            FluentActions.Invoking(() => tree.Remove(2)).Should().Throw<KeyNotFoundException>();
         }
 
         [Theory]
