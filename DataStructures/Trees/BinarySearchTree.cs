@@ -3,7 +3,7 @@ using DataStructures.Nodes;
 
 namespace DataStructures.Trees
 {
-    public class BinarySearchTree<T> : LinkedListBinaryTree<T>
+    public class BinarySearchTree<T> : BinaryTree<T>
         where T : IComparable<T>
     {
         public override void Add(T value)
@@ -51,11 +51,6 @@ namespace DataStructures.Trees
                     }
                 }
             }
-        }
-
-        public override void Remove(T value)
-        {
-            base.Remove(value);
         }
 
         /// <summary>

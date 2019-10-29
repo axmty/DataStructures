@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -13,7 +12,7 @@ namespace DataStructures.UnitTests
     /// The implementation of <see cref="Interfaces.IList{T}"/> to unit test.
     /// </typeparam>
     public abstract class BaseIList_Tests<TList>
-        where TList : DataStructures.Lists.IList<object>, new()
+        where TList : Lists.IList<object>, new()
     {
         public static TheoryData<object[], object, object[]> MemberData_Add => new TheoryData<object[], object, object[]>
         {

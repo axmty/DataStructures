@@ -7,9 +7,9 @@
             this.Value = value;
         }
 
-        public BinaryTreeNode<T> Left { get; internal set; }
+        public BinaryTreeNode<T> Left { get; set; }
 
-        public BinaryTreeNode<T> Right { get; internal set; }
+        public BinaryTreeNode<T> Right { get; set; }
 
         public T Value { get; private set; }
     }
