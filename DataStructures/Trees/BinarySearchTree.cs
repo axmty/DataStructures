@@ -3,20 +3,21 @@ using DataStructures.Nodes;
 
 namespace DataStructures.Trees
 {
-    public class BinarySearchTree<T> : BinaryTree<T>
-        where T : IComparable<T>
+    public class BinarySearchTree<T> where T : IComparable<T>
     {
-        public override void Add(T value)
+        public BinaryTreeNode<T> _root = null;
+
+        public void Add(T value)
         {
             var newNode = new BinaryTreeNode<T>(value);
 
-            if (this.Root == null)
+            if (_root == null)
             {
-                this.Root = newNode;
+                _root = newNode;
                 return;
             }
 
-            var node = this.Root;
+            var node = _root;
 
             while (node != null)
             {
@@ -58,7 +59,7 @@ namespace DataStructures.Trees
         /// </summary>
         public bool Search(T value)
         {
-            var node = this.Root;
+            var node = _root;
 
             while (node != null)
             {
