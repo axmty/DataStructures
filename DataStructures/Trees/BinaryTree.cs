@@ -60,7 +60,7 @@ namespace DataStructures.Trees
             //}
             //rec();
 
-            // ---------- Recursive version
+            // ---------- Iterative version
             var queue = new Queue<BinaryTreeNode<T>>();
             queue.Enqueue(this.Root);
 
