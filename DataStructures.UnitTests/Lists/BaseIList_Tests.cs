@@ -6,7 +6,7 @@ using Xunit;
 namespace DataStructures.UnitTests
 {
     /// <summary>
-    /// Base class to share the unit tests of the <see cref="Interfaces.IList{T}"/> implementations.
+    /// Base class to share the unit test logic of the <see cref="Interfaces.IList{T}"/> implementations.
     /// </summary>
     /// <typeparam name="TList">
     /// The implementation of <see cref="Interfaces.IList{T}"/> to unit test.
