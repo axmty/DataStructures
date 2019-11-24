@@ -7,41 +7,7 @@ namespace DataStructures.Trees
     public class BinaryTree<T>
     {
         public BinaryTreeNode<T> Root { get; set; } = null;
-
-        public virtual void Add(T value)
-        {
-            var newNode = new BinaryTreeNode<T>(value);
-
-            if (Root == null)
-            {
-                Root = newNode;
-            }
-            else
-            {
-                var queue = new Queue<BinaryTreeNode<T>>();
-
-                queue.Enqueue(Root);
-                while (queue.TryDequeue(out var node))
-                {
-                    if (node.Left == null)
-                    {
-                        node.Left = newNode;
-                        break;
-                    }
-                    else if (node.Right == null)
-                    {
-                        node.Right = newNode;
-                        break;
-                    }
-                    else
-                    {
-                        queue.Enqueue(node.Left);
-                        queue.Enqueue(node.Right);
-                    }
-                }
-            }
-        }
-
+        
         public void Bfs(Action<T> action)
         {
             // ---------- Recursive version
@@ -60,7 +26,7 @@ namespace DataStructures.Trees
             //}
             //rec();
 
-            // ---------- Recursive version
+            // ---------- Iterative version
             var queue = new Queue<BinaryTreeNode<T>>();
             queue.Enqueue(this.Root);
 
