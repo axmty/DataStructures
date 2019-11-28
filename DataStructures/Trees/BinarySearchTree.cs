@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataStructures.Nodes;
 
 namespace DataStructures.Trees
@@ -79,9 +80,46 @@ namespace DataStructures.Trees
             return false;
         }
 
-        public bool IsEquivalentTo(BinaryTree<T> binaryTree)
+        /// <summary>
+        /// Compares this BST to a binary tree. Returns true if and only if they hold exactly the same tree structure.
+        /// </summary>
+        public bool IsEquivalentTo(BinaryTree<T> compareTree)
         {
-            throw new NotImplementedException();
+            var thisTreeQueue = new Queue<BinaryTreeNode<T>>();
+            var compareTreeQueue = new Queue<BinaryTreeNode<T>>();
+            
+            if (this.Root == null)
+            {
+                return compareTree.Root == null;
+            }
+
+            if (compareTree.Root == null)
+            {
+                return this.Root == null;
+            }
+            
+            thisTreeQueue.Enqueue(this.Root);
+            compareTreeQueue.Enqueue(compareTree.Root);
+
+            while (thisTreeQueue.TryDequeue(out var thisTreeNode))
+            {
+                var compareTreeNode = compareTreeQueue.Dequeue();
+
+                if ((compareTreeNode == null && thisTreeNode != null) || 
+                    (compareTreeNode != null && thisTreeNode == null) || 
+                    (compareTreeNode != null && thisTreeNode != null) && compareTreeNode.Value.CompareTo(thisTreeNode.Value) == 0)
+                {
+                    return false;
+                }
+
+                thisTreeQueue.Enqueue(thisTreeNode.Left);
+                thisTreeQueue.Enqueue(thisTreeNode.Right);
+
+                compareTreeQueue.Enqueue(compareTreeNode.Left);
+                compareTreeQueue.Enqueue(compareTreeNode.Right);
+            }
+
+            return true;
         }
     }
 }

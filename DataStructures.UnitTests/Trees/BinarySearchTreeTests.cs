@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
 using DataStructures.Nodes;
 using DataStructures.Trees;
-using FluentAssertions;
 using Xunit;
 
 namespace DataStructures.UnitTests
