@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using DataStructures.Stacks;
 using FluentAssertions;
@@ -43,6 +44,14 @@ namespace DataStructures.UnitTests.Stacks
             stack.Peek().Should().Be(initial.Last());
         }
 
+        [Fact]
+        public void Peek_ThrowsInvalidOperationException_WhenStackIsEmpty()
+        {
+            var stack = new ArrayStack<object>(1);
+
+            FluentActions.Invoking(() => stack.Peek()).Should().Throw<InvalidOperationException>();
+        }
+
         [Theory]
         [MemberData(nameof(MemberData_Push_AddsAPeekableObjectOnTopOfTheStack))]
         public void Push_AddsAPeekableObjectOnTopOfTheStack(object[] initial, object toPush)
@@ -54,17 +63,13 @@ namespace DataStructures.UnitTests.Stacks
             stack.Peek().Should().Be(toPush);
         }
 
-        //stack.IsEmpty().Should().BeTrue();
-        //FluentActions.Invoking(() => stack.Peek()).Should().Throw<InvalidOperationException>();
-        //    FluentActions.Invoking(() => stack.Pop()).Should().Throw<InvalidOperationException>();
-        //    stack.Push(1);
-        //    stack.Peek().Should().Be(1);
-        //stack.Push(2);
-        //    FluentActions.Invoking(() => stack.Push(3)).Should().Throw<InvalidOperationException>();
-        //    stack.Peek().Should().Be(2);
-        //stack.Pop().Should().Be(2);
-        //stack.Pop().Should().Be(1);
-        //stack.IsEmpty().Should().BeTrue();
+        [Fact]
+        public void Push_ThrowsInvalidOperationException_WhenStackIsFull()
+        {
+            var stack = this.Build(new object[] { 1, 2 }, 2);
+
+            FluentActions.Invoking(() => stack.Push(1)).Should().Throw<InvalidOperationException>();
+        }
 
         private ArrayStack<object> Build(object[] items, int length)
         {
