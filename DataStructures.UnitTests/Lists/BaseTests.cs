@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
-namespace DataStructures.UnitTests
+namespace DataStructures.UnitTests.Lists
 {
     /// <summary>
     /// Base class to share the unit test logic of the <see cref="Interfaces.IList{T}"/> implementations.
@@ -11,7 +11,7 @@ namespace DataStructures.UnitTests
     /// <typeparam name="TList">
     /// The implementation of <see cref="Interfaces.IList{T}"/> to unit test.
     /// </typeparam>
-    public abstract class BaseListTests<TList>
+    public abstract class BaseTests<TList>
         where TList : DataStructures.Lists.IList<object>, new()
     {
         public static TheoryData<object[], object, object[]> MemberData_Add_ModifiesTheList => new TheoryData<object[], object, object[]>
@@ -36,19 +36,19 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, null }, 4, false }
         };
 
+        public static TheoryData<object[], object[], int, object[]> MemberData_CopyTo_ModifiesDestinationArray => new TheoryData<object[], object[], int, object[]>
+        {
+            { new object[] { }, new object[] { 1, 2, 3 }, 2, new object[] { 1, 2, 3 } },
+            { new object[] { 4, 5, 6 }, new object[] { 1, 2, 3, 4, 5, 6 }, 0, new object[] { 4, 5, 6, 4, 5, 6 } },
+            { new object[] { 1, 2, 3 }, new object[] { 1, 2, 3, 4, 5, 6 }, 3, new object[] { 1, 2, 3, 1, 2, 3 } }
+        };
+
         public static TheoryData<object[], object[], int, Type> MemberData_CopyTo_Throws_WhenArgumentsAreNotValid => new TheoryData<object[], object[], int, Type>
         {
             { new object[] { }, null, 4, typeof(ArgumentNullException) },
             { new object[] { }, new object[4], -1, typeof(ArgumentOutOfRangeException) },
             { new object[] { }, new object[4], 4, typeof(ArgumentOutOfRangeException) },
             { new object[] { 1, 2, 3 }, new object[] { 1, 2, 3, 4, 5, 6 }, 4, typeof(ArgumentOutOfRangeException) }
-        };
-
-        public static TheoryData<object[], object[], int, object[]> MemberData_CopyTo_ModifiesDestinationArray => new TheoryData<object[], object[], int, object[]>
-        {
-            { new object[] { }, new object[] { 1, 2, 3 }, 2, new object[] { 1, 2, 3 } },
-            { new object[] { 4, 5, 6 }, new object[] { 1, 2, 3, 4, 5, 6 }, 0, new object[] { 4, 5, 6, 4, 5, 6 } },
-            { new object[] { 1, 2, 3 }, new object[] { 1, 2, 3, 4, 5, 6 }, 3, new object[] { 1, 2, 3, 1, 2, 3 } }
         };
 
         public static TheoryData<object[], Predicate<object>, bool> MemberData_Exists_ReturnsTrue_WhenAnItemMatches => new TheoryData<object[], Predicate<object>, bool>

@@ -54,9 +54,6 @@ namespace DataStructures.Trees
             }
         }
 
-        /// <summary>
-        /// Complexity: O(log(n)).
-        /// </summary>
         public bool Search(T value)
         {
             var node = this.Root;
@@ -80,6 +77,11 @@ namespace DataStructures.Trees
             }
 
             return false;
+        }
+
+        public bool IsEquivalentTo(BinaryTree<T> binaryTree)
+        {
+            throw new NotImplementedException();
         }
     }
 }

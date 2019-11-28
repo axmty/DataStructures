@@ -95,6 +95,11 @@ namespace DataStructures.Trees
             }
         }
 
+        public bool IsSearchTree()
+        {
+            throw new NotImplementedException();
+        }
+
         public void PostOrder(Action<T> action)
         {
             // ---------- Recursive version
