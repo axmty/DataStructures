@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DataStructures.Stacks
 {
-    public class ArrayStack<T>
+    public class ArrayStack<T> : IEnumerable<T>
     {
         private readonly T[] _array;
         private int _top = -1;
@@ -18,6 +21,11 @@ namespace DataStructures.Stacks
         }
 
         public int Size => _array.Length;
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return _array.Cast<T>().GetEnumerator();
+        }
 
         public bool IsEmpty()
         {
@@ -57,6 +65,11 @@ namespace DataStructures.Stacks
             }
 
             _array[++_top] = item;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _array.GetEnumerator();
         }
     }
 }
