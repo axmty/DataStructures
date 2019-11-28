@@ -194,7 +194,6 @@ namespace DataStructures.UnitTests
             var list = this.Build(initial);
 
             list.ForEach(action);
-
             this.Compare(list, initial);
         }
 
