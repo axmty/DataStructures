@@ -1,3 +1,4 @@
+using System.Linq;
 using DataStructures.Stacks;
 using FluentAssertions;
 using Xunit;
@@ -10,6 +11,12 @@ namespace DataStructures.UnitTests.Stacks
         {
             { new object[] { }, true },
             { new object[] { 1 }, false }
+        };
+
+        public static TheoryData<object[]> MemberData_Peek_ReturnsTheTopObjectOfTheStack_WhenNotEmpty => new TheoryData<object[]>
+        {
+            { new object[] { 1 } },
+            { new object[] { 1, 2 } }
         };
 
         public static TheoryData<object[], object> MemberData_Push_AddsAPeekableObjectOnTopOfTheStack => new TheoryData<object[], object>
@@ -25,6 +32,15 @@ namespace DataStructures.UnitTests.Stacks
             var stack = this.Build(initial, 10);
 
             stack.IsEmpty().Should().Be(expected);
+        }
+
+        [Theory]
+        [MemberData(nameof(MemberData_Peek_ReturnsTheTopObjectOfTheStack_WhenNotEmpty))]
+        public void Peek_ReturnsTheTopObjectOfTheStack_WhenNotEmpty(object[] initial)
+        {
+            var stack = this.Build(initial, 10);
+
+            stack.Peek().Should().Be(initial.Last());
         }
 
         [Theory]
