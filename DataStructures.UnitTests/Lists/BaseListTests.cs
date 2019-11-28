@@ -11,22 +11,22 @@ namespace DataStructures.UnitTests
     /// <typeparam name="TList">
     /// The implementation of <see cref="Interfaces.IList{T}"/> to unit test.
     /// </typeparam>
-    public abstract class BaseIList_Tests<TList>
-        where TList : Lists.IList<object>, new()
+    public abstract class BaseListTests<TList>
+        where TList : DataStructures.Lists.IList<object>, new()
     {
-        public static TheoryData<object[], object, object[]> MemberData_Add => new TheoryData<object[], object, object[]>
+        public static TheoryData<object[], object, object[]> MemberData_Add_ModifiesTheList => new TheoryData<object[], object, object[]>
         {
             { new object[] { }, 1, new object[] { 1 } },
             { new object[] { 1, 2 }, 3, new object[] { 1, 2, 3 } }
         };
 
-        public static TheoryData<object[], object[]> MemberData_Clear => new TheoryData<object[], object[]>
+        public static TheoryData<object[], object[]> MemberData_Clear_EmptiesTheList => new TheoryData<object[], object[]>
         {
             { new object[] { }, new object[] { } },
             { new object[] { 1, 2 }, new object[] { } }
         };
 
-        public static TheoryData<object[], object, bool> MemberData_Contains => new TheoryData<object[], object, bool>
+        public static TheoryData<object[], object, bool> MemberData_Contains_ReturnsTrue_WhenTheListHoldsTheItem => new TheoryData<object[], object, bool>
         {
             { new object[] { }, 1, false },
             { new object[] { 1, 2, 3 }, 1, true },
@@ -36,7 +36,7 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, null }, 4, false }
         };
 
-        public static TheoryData<object[], object[], int, Type> MemberData_CopyTo_NotValid => new TheoryData<object[], object[], int, Type>
+        public static TheoryData<object[], object[], int, Type> MemberData_CopyTo_Throws_WhenArgumentsAreNotValid => new TheoryData<object[], object[], int, Type>
         {
             { new object[] { }, null, 4, typeof(ArgumentNullException) },
             { new object[] { }, new object[4], -1, typeof(ArgumentOutOfRangeException) },
@@ -44,14 +44,14 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2, 3 }, new object[] { 1, 2, 3, 4, 5, 6 }, 4, typeof(ArgumentOutOfRangeException) }
         };
 
-        public static TheoryData<object[], object[], int, object[]> MemberData_CopyTo_Valid => new TheoryData<object[], object[], int, object[]>
+        public static TheoryData<object[], object[], int, object[]> MemberData_CopyTo_ModifiesDestinationArray => new TheoryData<object[], object[], int, object[]>
         {
             { new object[] { }, new object[] { 1, 2, 3 }, 2, new object[] { 1, 2, 3 } },
             { new object[] { 4, 5, 6 }, new object[] { 1, 2, 3, 4, 5, 6 }, 0, new object[] { 4, 5, 6, 4, 5, 6 } },
             { new object[] { 1, 2, 3 }, new object[] { 1, 2, 3, 4, 5, 6 }, 3, new object[] { 1, 2, 3, 1, 2, 3 } }
         };
 
-        public static TheoryData<object[], Predicate<object>, bool> MemberData_Exists => new TheoryData<object[], Predicate<object>, bool>
+        public static TheoryData<object[], Predicate<object>, bool> MemberData_Exists_ReturnsTrue_WhenAnItemMatches => new TheoryData<object[], Predicate<object>, bool>
         {
             { new object[] { }, item => (int)item % 2 == 0, false },
             { new object[] { 1, 2, 3 }, item => (int)item % 2 == 0, true },
@@ -59,7 +59,7 @@ namespace DataStructures.UnitTests
             { new object[] { 1, null, 5 }, item => EqualityComparer<object>.Default.Equals(item, null), true }
         };
 
-        public static TheoryData<object[], Predicate<object>, object> MemberData_Find => new TheoryData<object[], Predicate<object>, object>
+        public static TheoryData<object[], Predicate<object>, object> MemberData_Find_ReturnsTheFirstMatchingItemOrDefault => new TheoryData<object[], Predicate<object>, object>
         {
             { new object[] { }, item => (int)item % 2 == 0, null },
             { new object[] { 1, 2, 3 }, item => (int)item % 2 == 0, 2 },
@@ -67,7 +67,7 @@ namespace DataStructures.UnitTests
             { new object[] { 1, null, 5 }, item => EqualityComparer<object>.Default.Equals(item, null), null }
         };
 
-        public static TheoryData<object[], Predicate<object>, object> MemberData_FindAll => new TheoryData<object[], Predicate<object>, object>
+        public static TheoryData<object[], Predicate<object>, object> MemberData_FindAll_ReturnsAllMatchingItems => new TheoryData<object[], Predicate<object>, object>
         {
             { new object[] { }, item => (int)item % 2 == 0, new object[] { } },
             { new object[] { 1, 2, 3, 4 }, item => (int)item % 2 == 0, new object[] { 2, 4 } },
@@ -75,13 +75,13 @@ namespace DataStructures.UnitTests
             { new object[] { 1, null, 5, null }, item => EqualityComparer<object>.Default.Equals(item, null), new object[] { null, null } }
         };
 
-        public static TheoryData<object[], Action<object>> MemberData_ForEach => new TheoryData<object[], Action<object>>
+        public static TheoryData<object[], Action<object>> MemberData_ForEach_InvokesActionForAllTheItems => new TheoryData<object[], Action<object>>
         {
             { new object[] { }, item => item = (int)item + 1 },
             { new object[] { 0, 1, 2 }, item => item = (int)item + 1 }
         };
 
-        public static TheoryData<object[], int, bool> MemberData_Indexer => new TheoryData<object[], int, bool>
+        public static TheoryData<object[], int, bool> MemberData_Indexer_ThrowsIndexOutOfRange_WhenIndexIsNotInAValidRange => new TheoryData<object[], int, bool>
         {
             { new object[] { }, 0, true },
             { new object[] { 1, 2 }, -1, true },
@@ -90,7 +90,7 @@ namespace DataStructures.UnitTests
             { new object[] { 1, 2 }, 1, false }
         };
 
-        public static TheoryData<object[], object, int> MemberData_IndexOF => new TheoryData<object[], object, int>
+        public static TheoryData<object[], object, int> MemberData_IndexOf_ReturnsIndexOfSearchedElementOrMinusOne => new TheoryData<object[], object, int>
         {
             { new object[] { }, 1, -1 },
             { new object[] { 1, 2, 3 }, null, -1 },
@@ -98,8 +98,8 @@ namespace DataStructures.UnitTests
         };
 
         [Theory]
-        [MemberData(nameof(MemberData_Add))]
-        public void Add_ShouldModifyTheList(object[] initial, object toAdd, object[] expected)
+        [MemberData(nameof(MemberData_Add_ModifiesTheList))]
+        public void Add_ModifiesTheList(object[] initial, object toAdd, object[] expected)
         {
             var list = this.Build(initial);
 
@@ -109,8 +109,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_Clear))]
-        public void Clear_ShouldEmptyTheList(object[] initial, object[] expected)
+        [MemberData(nameof(MemberData_Clear_EmptiesTheList))]
+        public void Clear_EmptiesTheList(object[] initial, object[] expected)
         {
             var list = this.Build(initial);
 
@@ -120,8 +120,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_Contains))]
-        public void Contains_ShouldReturnTrue_WhenTheListHoldsTheItem(object[] initial, object seek, bool expected)
+        [MemberData(nameof(MemberData_Contains_ReturnsTrue_WhenTheListHoldsTheItem))]
+        public void Contains_ReturnsTrue_WhenTheListHoldsTheItem(object[] initial, object seek, bool expected)
         {
             var list = this.Build(initial);
 
@@ -130,8 +130,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_CopyTo_Valid))]
-        public void CopyTo_ShouldModifyDestinationArray(object[] initial, object[] destinationArray, int arrayIndex, object[] expectedArray)
+        [MemberData(nameof(MemberData_CopyTo_ModifiesDestinationArray))]
+        public void CopyTo_ModifiesDestinationArray(object[] initial, object[] destinationArray, int arrayIndex, object[] expectedArray)
         {
             var list = this.Build(initial);
 
@@ -142,8 +142,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_CopyTo_NotValid))]
-        public void CopyTo_ShouldThrow_WhenArgumentsAreNotValid(object[] initial, object[] destinationArray, int arrayIndex, Type exceptionType)
+        [MemberData(nameof(MemberData_CopyTo_Throws_WhenArgumentsAreNotValid))]
+        public void CopyTo_Throws_WhenArgumentsAreNotValid(object[] initial, object[] destinationArray, int arrayIndex, Type exceptionType)
         {
             var list = this.Build(initial);
 
@@ -158,8 +158,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_Exists))]
-        public void Exists_ShouldReturnTrue_WhenAnItemMatches(object[] initial, Predicate<object> match, bool expected)
+        [MemberData(nameof(MemberData_Exists_ReturnsTrue_WhenAnItemMatches))]
+        public void Exists_ReturnsTrue_WhenAnItemMatches(object[] initial, Predicate<object> match, bool expected)
         {
             var list = this.Build(initial);
 
@@ -168,8 +168,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_Find))]
-        public void Find_ShouldReturnTheFirstMatchingItemOrDefault(object[] initial, Predicate<object> match, object expected)
+        [MemberData(nameof(MemberData_Find_ReturnsTheFirstMatchingItemOrDefault))]
+        public void Find_ReturnsTheFirstMatchingItemOrDefault(object[] initial, Predicate<object> match, object expected)
         {
             var list = this.Build(initial);
 
@@ -178,8 +178,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_FindAll))]
-        public void FindAll_ShouldReturnAllMatchingItems(object[] initial, Predicate<object> match, object[] expected)
+        [MemberData(nameof(MemberData_FindAll_ReturnsAllMatchingItems))]
+        public void FindAll_ReturnsAllMatchingItems(object[] initial, Predicate<object> match, object[] expected)
         {
             var list = this.Build(initial);
 
@@ -188,8 +188,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_ForEach))]
-        public void ForEach_ShouldInvokeActionForAllTheItems(object[] initial, Action<object> action)
+        [MemberData(nameof(MemberData_ForEach_InvokesActionForAllTheItems))]
+        public void ForEach_InvokesActionForAllTheItems(object[] initial, Action<object> action)
         {
             var list = this.Build(initial);
 
@@ -199,8 +199,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_Indexer))]
-        public void Indexer_ShouldThrowIndexOutOfRange_WhenIndexIsNotInAValidRange(object[] initial, int index, bool shouldThrow)
+        [MemberData(nameof(MemberData_Indexer_ThrowsIndexOutOfRange_WhenIndexIsNotInAValidRange))]
+        public void Indexer_ThrowsIndexOutOfRange_WhenIndexIsNotInAValidRange(object[] initial, int index, bool shouldThrow)
         {
             var list = this.Build(initial);
 
@@ -221,8 +221,8 @@ namespace DataStructures.UnitTests
         }
 
         [Theory]
-        [MemberData(nameof(MemberData_IndexOF))]
-        public void IndexOf_ShouldReturnIndexOfSearchedElementOrMinusOne(object[] initial, object toFind, int index)
+        [MemberData(nameof(MemberData_IndexOf_ReturnsIndexOfSearchedElementOrMinusOne))]
+        public void IndexOf_ReturnsIndexOfSearchedElementOrMinusOne(object[] initial, object toFind, int index)
         {
             var list = this.Build(initial);
 

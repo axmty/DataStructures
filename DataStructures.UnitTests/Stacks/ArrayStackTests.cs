@@ -3,9 +3,9 @@ using DataStructures.Stacks;
 using FluentAssertions;
 using Xunit;
 
-namespace DataStructures.UnitTests
+namespace DataStructures.UnitTests.Stacks
 {
-    public class ArrayStack_Tests
+    public class ArrayStackTests
     {
         [Fact]
         public void TestStack()

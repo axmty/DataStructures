@@ -7,7 +7,7 @@ using Xunit;
 
 namespace DataStructures.UnitTests
 {
-    public class BinaryTree_Tests
+    public class BinaryTreeTests
     {
         [Fact]
         public void Bfs_ShouldInvokeActionInABfsTraversal()
