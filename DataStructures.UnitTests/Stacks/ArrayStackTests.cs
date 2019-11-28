@@ -12,6 +12,12 @@ namespace DataStructures.UnitTests.Stacks
             { new object[] { 1 }, false }
         };
 
+        public static TheoryData<object[], object> MemberData_Push_AddsAPeekableObjectOnTopOfTheStack => new TheoryData<object[], object>
+        {
+            { new object[] { }, 1 },
+            { new object[] { 1 }, 2 }
+        };
+
         [Theory]
         [MemberData(nameof(MemberData_IsEmpty_ReturnsTrueIfAndOnlyIfTheStackIsEmpty))]
         public void IsEmpty_ReturnsTrueIfAndOnlyIfTheStackIsEmpty(object[] initial, bool expected)
@@ -19,6 +25,17 @@ namespace DataStructures.UnitTests.Stacks
             var stack = this.Build(initial, 10);
 
             stack.IsEmpty().Should().Be(expected);
+        }
+
+        [Theory]
+        [MemberData(nameof(MemberData_Push_AddsAPeekableObjectOnTopOfTheStack))]
+        public void Push_AddsAPeekableObjectOnTopOfTheStack(object[] initial, object toPush)
+        {
+            var stack = this.Build(initial, 10);
+
+            stack.Push(toPush);
+
+            stack.Peek().Should().Be(toPush);
         }
 
         //stack.IsEmpty().Should().BeTrue();
