@@ -11,7 +11,7 @@ namespace DataStructures.Trees
         public void Bfs(Action<T> action)
         {
             // ---------- Recursive version
-            //var queue = new Queue<T>();
+            //var queue = new Queue<BinaryTreeNode<T>>();
             //queue.Enqueue(this.Root);
             //void rec()
             //{
@@ -40,6 +40,25 @@ namespace DataStructures.Trees
                 action(node.Value);
                 queue.Enqueue(node.Left);
                 queue.Enqueue(node.Right);
+            }
+        }
+
+        public void Dfs(Action<T> action)
+        {
+            // ---------- Iterative version
+            var stack = new Stack<BinaryTreeNode<T>>();
+            stack.Push(this.Root);
+
+            while (stack.TryPop(out var node))
+            {
+                if (node == null)
+                {
+                    continue;
+                }
+
+                action(node.Value);
+                stack.Push(node.Right);
+                stack.Push(node.Left);
             }
         }
 
