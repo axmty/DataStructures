@@ -81,6 +81,13 @@ namespace DataStructures.UnitTests.Lists
             { new object[] { 0, 1, 2 }, item => item = (int)item + 1 }
         };
 
+        public static TheoryData<object[], int, object> MemberData_Indexer_ReturnsIndexAtTheSpecifiedIndex_WhenInValidRange => new TheoryData<object[], int, object>
+        {
+            { new object[] { 1, 2, 3 }, 0, 1 },
+            { new object[] { 1, 2, 3 }, 1, 2 },
+            { new object[] { 1, 2, 3 }, 2, 3 }
+        };
+
         public static TheoryData<object[], int, bool> MemberData_Indexer_ThrowsIndexOutOfRange_WhenIndexIsNotInAValidRange => new TheoryData<object[], int, bool>
         {
             { new object[] { }, 0, true },
@@ -195,6 +202,15 @@ namespace DataStructures.UnitTests.Lists
 
             list.ForEach(action);
             this.Compare(list, initial);
+        }
+
+        [Theory]
+        [MemberData(nameof(MemberData_Indexer_ReturnsIndexAtTheSpecifiedIndex_WhenInValidRange))]
+        public void Indexer_ReturnsIndexAtTheSpecifiedIndex_WhenInValidRange(object[] initial, int index, object expected)
+        {
+            var list = this.Build(initial);
+
+            list[index].Should().Be(expected);
         }
 
         [Theory]
