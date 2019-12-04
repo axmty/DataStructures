@@ -6,19 +6,19 @@ namespace DataStructures.Trees
 {
     public class BinarySearchTree<T> where T : IComparable<T>
     {
-        public BinaryTreeNode<T> Root { get; private set; } = null;
+        public BinaryTreeNode<T> _root = null;
 
         public void Add(T value)
         {
             var newNode = new BinaryTreeNode<T>(value);
 
-            if (this.Root == null)
+            if (_root == null)
             {
-                this.Root = newNode;
+                _root = newNode;
                 return;
             }
 
-            var node = this.Root;
+            var node = _root;
 
             while (node != null)
             {
@@ -57,7 +57,7 @@ namespace DataStructures.Trees
 
         public bool Search(T value)
         {
-            var node = this.Root;
+            var node = _root;
 
             while (node != null)
             {
@@ -88,17 +88,17 @@ namespace DataStructures.Trees
             var thisTreeQueue = new Queue<BinaryTreeNode<T>>();
             var compareTreeQueue = new Queue<BinaryTreeNode<T>>();
             
-            if (this.Root == null)
+            if (_root == null)
             {
                 return compareTree.Root == null;
             }
 
             if (compareTree.Root == null)
             {
-                return this.Root == null;
+                return _root == null;
             }
             
-            thisTreeQueue.Enqueue(this.Root);
+            thisTreeQueue.Enqueue(_root);
             compareTreeQueue.Enqueue(compareTree.Root);
 
             while (thisTreeQueue.TryDequeue(out var thisTreeNode))
