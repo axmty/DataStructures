@@ -13,6 +13,8 @@ test.each([
   expect(fns.areAnagrams(s1, s2)).toBe(expected);
 });
 
+// ------------------------------------------------------------------------------------------------
+
 const testCases_countUniqueValues = [
   [[1, 1, 1, 1, 2], 2],
   [[1, 2, 3, 4, 4, 4, 5, 5, 12, 13], 7],
@@ -25,9 +27,11 @@ test.each(testCases_countUniqueValues)('countUniqueValues_noExtraStructure(%p)',
   expect(fns.countUniqueValues_noExtraStructure(arr)).toBe(expected);
 });
 
-test.each(testCases_countUniqueValues)('countUniqueValues_withMap(%p)', (arr, expected) => {
-  expect(fns.countUniqueValues_withMap(arr)).toBe(expected);
+test.each(testCases_countUniqueValues)('countUniqueValues_withSet(%p)', (arr, expected) => {
+  expect(fns.countUniqueValues_withSet(arr)).toBe(expected);
 });
+
+// ------------------------------------------------------------------------------------------------
 
 test.each([
   [1, 1, true],
