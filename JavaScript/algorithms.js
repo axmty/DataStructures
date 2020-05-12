@@ -8,7 +8,7 @@ export function areAnagrams(first, second) {
   const lookup = {};
   for (let i = 0; i < first.length; i++) {
     const letter = first[i];
-    lookup[letter] ? lookup[letter] += 1 : lookup[letter] = 1;
+    lookup[letter] = (lookup[letter] || 0) + 1;
   }
 
   for (let i = 0; i < second.length; i++) {
@@ -23,8 +23,11 @@ export function areAnagrams(first, second) {
   return true;
 }
 
-// returns the number of unique values in the array (elements are sorted)
-// with no extra data structure - O(1) space - O(n) time
+// ------------------------------------------------------------------------------------------------
+
+// returns the number of unique values in the array
+// with no extra data structure, array needs to be sorted
+// O(1) space - O(n) time
 export function countUniqueValues_noExtraStructure(arr) {
   if (arr.length === 0) {
     return 0;
@@ -41,7 +44,15 @@ export function countUniqueValues_noExtraStructure(arr) {
   return count;
 }
 
-// with map - O(n) space - O(n) time
+// with map, array does not need to be sorted - O(n) space - O(n) time
 export function countUniqueValues_withMap(arr) {
   return new Set(arr).size;
+}
+
+// ------------------------------------------------------------------------------------------------
+
+// returns true if and and only if the two positive integers have the same frequency of digits
+// O(1) space - O(n) time
+export function haveSameDigitFrequencies(x, y) {
+  return areAnagrams(String(x), String(y));
 }

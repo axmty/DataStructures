@@ -28,3 +28,13 @@ test.each(testCases_countUniqueValues)('countUniqueValues_noExtraStructure(%p)',
 test.each(testCases_countUniqueValues)('countUniqueValues_withMap(%p)', (arr, expected) => {
   expect(fns.countUniqueValues_withMap(arr)).toBe(expected);
 });
+
+test.each([
+  [1, 1, true],
+  [1, 2, false],
+  [123, 321, true],
+  [12, 32, false],
+  [11, 1, false]
+])('haveSameDigitFrequencies(%p, %p)', (x, y, expected) => {
+  expect(fns.haveSameDigitFrequencies(x, y)).toBe(expected);
+});
