@@ -79,3 +79,15 @@ test.each([
 ])('maxSubarraySum(%p, %p)', (arr, sliceLength, expected) => {
   expect(fns.maxSubarraySum(arr, sliceLength)).toBe(expected);
 });
+
+// ------------------------------------------------------------------------------------------------
+
+test.each([
+  [[], 2, false],
+  [[2], 2, false],
+  [[1, 2, 3], 2.5, true],
+  [[1, 3, 3, 5, 6, 7, 10, 12, 19], 8, true],
+  [[-1, 0, 3, 4, 5, 6], 4.1, false]
+])('averagePair(%p, %p)', (arr, targetAverage, expected) => {
+  expect(fns.averagePair(arr, targetAverage)).toBe(expected);
+});
