@@ -100,6 +100,32 @@ export function areThereDuplicates_withSet(...args) {
 
 // ------------------------------------------------------------------------------------------------
 
+// Given a sorted array of integers, returns true if and only if there is
+// a pair of values in the array whose average equals the given average.
+// O(1) space - O(n) time
+export function averagePair(arr, targetAverage) {
+  if (arr.length < 2) {
+    return false;
+  }
+
+  let start = 0;
+  let end = arr.length - 1;
+  while (start !== end) {
+    const average = (arr[start] + arr[end]) / 2;
+    if (average === targetAverage) {
+      return true;
+    } else if (average < targetAverage) {
+      start++;
+    } else {
+      end--;
+    }
+  }
+
+  return false;
+}
+
+// ------------------------------------------------------------------------------------------------
+
 // Returns the maximum sum of a subarray of the given length.
 // O(1) space - O(n) time
 export function maxSubarraySum(arr, sliceLength) {
