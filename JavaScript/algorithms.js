@@ -1,3 +1,5 @@
+// ------------------------------------------------------------------------------------------------
+
 // Returns true if and only if the two strings are anagrams.
 // O(1) space - O(n) time
 export function areAnagrams(first, second) {
@@ -91,7 +93,7 @@ export function areThereDuplicates_withSorting(...args) {
 }
 
 // One liner solution with Set.
-// O(n) space - O(n) time (in V8 engine, Set basic operations are O(1) time)
+// O(n) space - O(n) time (in V8 engine, Set.add is O(1) time)
 export function areThereDuplicates_withSet(...args) {
   return new Set(args).size !== args.length;
 }
