@@ -1,6 +1,5 @@
-// Given two strings, write a function that determines
-// if the second is an anagram of the first.
-function validAnagram(first, second) {
+// Returns true if and only if the two strings are anagrams.
+function areAnagrams(first, second) {
   if (first.length !== second.length) {
     return false;
   }
@@ -23,6 +22,31 @@ function validAnagram(first, second) {
   return true;
 }
 
+// Returns the number of unique values in the array (elements are sorted).
+// With no extra data structure - O(1) space - O(n) time
+function countUniqueValues_noExtraStructure(arr) {
+  if (arr.length === 0) {
+    return 0;
+  }
+
+  let count = 1;
+  let val = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i - 1] !== arr[i]) {
+      count++;
+    }
+  }
+
+  return count;
+}
+
+// With Map - O(n) space - O(n) time
+function countUniqueValues_withMap(arr) {
+  return new Set(arr).size;
+}
+
 module.exports = {
-  validAnagram
+  areAnagrams,
+  countUniqueValues_noExtraStructure,
+  countUniqueValues_withMap
 };
