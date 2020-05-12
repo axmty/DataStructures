@@ -1,5 +1,6 @@
-// Returns true if and only if the two strings are anagrams.
-function areAnagrams(first, second) {
+// returns true if and only if the two strings are anagrams
+// O(1) space - O(n) time
+export function areAnagrams(first, second) {
   if (first.length !== second.length) {
     return false;
   }
@@ -22,9 +23,9 @@ function areAnagrams(first, second) {
   return true;
 }
 
-// Returns the number of unique values in the array (elements are sorted).
-// With no extra data structure - O(1) space - O(n) time
-function countUniqueValues_noExtraStructure(arr) {
+// returns the number of unique values in the array (elements are sorted)
+// with no extra data structure - O(1) space - O(n) time
+export function countUniqueValues_noExtraStructure(arr) {
   if (arr.length === 0) {
     return 0;
   }
@@ -40,13 +41,7 @@ function countUniqueValues_noExtraStructure(arr) {
   return count;
 }
 
-// With Map - O(n) space - O(n) time
-function countUniqueValues_withMap(arr) {
+// with map - O(n) space - O(n) time
+export function countUniqueValues_withMap(arr) {
   return new Set(arr).size;
 }
-
-module.exports = {
-  areAnagrams,
-  countUniqueValues_noExtraStructure,
-  countUniqueValues_withMap
-};

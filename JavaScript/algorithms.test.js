@@ -1,4 +1,4 @@
-const fns = require('./questions');
+import * as fns from './algorithms';
 
 test.each([
   ["", "", true],
@@ -17,6 +17,7 @@ const testCases_countUniqueValues = [
   [[1, 1, 1, 1, 2], 2],
   [[1, 2, 3, 4, 4, 4, 5, 5, 12, 13], 7],
   [[], 0],
+  [[3], 1],
   [[-2, -1, -1, 0, 1], 4]
 ];
 
