@@ -67,3 +67,15 @@ test.each(testCases_areThereDuplicates)('areThereDuplicates_withSorting(...%p)',
 test.each(testCases_areThereDuplicates)('areThereDuplicates_withSet(...%p)', (arr, expected) => {
   expect(fns.areThereDuplicates_withSet(...arr)).toBe(expected);
 });
+
+// ------------------------------------------------------------------------------------------------
+
+test.each([
+  [[1, 2, 7, 3], 1, 7],
+  [[100, 200, 300, 400], 2, 700],
+  [[1, 4, 2, 10, 23, 3, 1, 0, 20], 4, 39],
+  [[-3, 4, 0, -2, 6, -1], 2, 5],
+  [[2, 3], 3, null]
+])('maxSubarraySum(%p, %p)', (arr, sliceLength, expected) => {
+  expect(fns.maxSubarraySum(arr, sliceLength)).toBe(expected);
+});

@@ -97,3 +97,27 @@ export function areThereDuplicates_withSorting(...args) {
 export function areThereDuplicates_withSet(...args) {
   return new Set(args).size !== args.length;
 }
+
+// ------------------------------------------------------------------------------------------------
+
+// Returns the maximum sum of a subarray of the given length.
+// O(1) space - O(n) time
+export function maxSubarraySum(arr, sliceLength) {
+  if (sliceLength > arr.length || sliceLength === 0) {
+    return null;
+  }
+
+  let max = 0;
+  for (let i = sliceLength - 1; i < arr.length; i++) {
+    let sum = 0;
+    for (let j = i - sliceLength + 1; j <= i; j++) {
+      sum += arr[j];
+    }
+
+    if (sum > max) {
+      max = sum;
+    }
+  }
+
+  return max;
+}
