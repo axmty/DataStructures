@@ -65,11 +65,11 @@ export function haveSameDigitFrequencies(x, y) {
 // O(n) space - O(n) time
 export function areThereDuplicates_withLookup(...args) {
   const lookup = {};
-  for (const param of args) {
-    if (lookup[param]) {
+  for (const arg of args) {
+    if (lookup[arg]) {
       return true;
     } else {
-      lookup[param] = true;
+      lookup[arg] = true;
     }
   }
 
@@ -79,7 +79,7 @@ export function areThereDuplicates_withLookup(...args) {
 // With sorting.
 // O(1) space - O(nlog(n)) time (sort complexity)
 export function areThereDuplicates_withSorting(...args) {
-  args.sort((a, b) => a > b);
+  args.sort();
 
   for (let i = 1; i < args.length; i++) {
     if (args[i - 1] === args[i]) {
@@ -93,5 +93,5 @@ export function areThereDuplicates_withSorting(...args) {
 // One liner solution with Set.
 // O(n) space - O(n) time (in V8 engine, Set basic operations are O(1) time)
 export function areThereDuplicates_withSet(...args) {
-  return new Set(args).size === args.length;
+  return new Set(args).size !== args.length;
 }

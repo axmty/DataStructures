@@ -1,14 +1,14 @@
 import * as fns from './algorithms';
 
 test.each([
-  ["", "", true],
-  ["a", "", false],
-  ["a", "a", true],
-  ["a", "b", false],
-  ["ab", "c", false],
-  ["aa", "a", false],
-  ["abc", "cba", true],
-  ["abc", "abd", false]
+  ['', '', true],
+  ['a', '', false],
+  ['a', 'a', true],
+  ['a', 'b', false],
+  ['ab', 'c', false],
+  ['aa', 'a', false],
+  ['abc', 'cba', true],
+  ['abc', 'abd', false]
 ])('areAnagrams(%p, %p)', (s1, s2, expected) => {
   expect(fns.areAnagrams(s1, s2)).toBe(expected);
 });
@@ -41,4 +41,27 @@ test.each([
   [11, 1, false]
 ])('haveSameDigitFrequencies(%p, %p)', (x, y, expected) => {
   expect(fns.haveSameDigitFrequencies(x, y)).toBe(expected);
+});
+
+// ------------------------------------------------------------------------------------------------
+
+const testCases_areThereDuplicates = [
+  [[], false],
+  [[1], false],
+  [[1, 1, 2], true],
+  [[1, 2, 3], false],
+  [['a', 'b', 'c'], false],
+  [['a', 'b', 'c', 'a'], true]
+];
+
+test.each(testCases_areThereDuplicates)('areThereDuplicates_withLookup(...%p)', (arr, expected) => {
+  expect(fns.areThereDuplicates_withLookup(...arr)).toBe(expected);
+});
+
+test.each(testCases_areThereDuplicates)('areThereDuplicates_withSorting(...%p)', (arr, expected) => {
+  expect(fns.areThereDuplicates_withSorting(...arr)).toBe(expected);
+});
+
+test.each(testCases_areThereDuplicates)('areThereDuplicates_withSet(...%p)', (arr, expected) => {
+  expect(fns.areThereDuplicates_withSet(...arr)).toBe(expected);
 });
