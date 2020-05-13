@@ -126,7 +126,8 @@ export function averagePair(arr, targetAverage) {
 
 // ------------------------------------------------------------------------------------------------
 
-// Returns true if and only if the first string is a subsequence of the second one.
+// Returns true if and only if the first string is a subsequence of the second one, ie.
+// the characters in the first string appear in the second string, without their order changing.
 // O(1) space - O(n + m) time
 export function isSubsequence(s1, s2) {
   let i1 = 0;

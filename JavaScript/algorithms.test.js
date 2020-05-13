@@ -91,3 +91,14 @@ test.each([
 ])('averagePair(%p, %p)', (arr, targetAverage, expected) => {
   expect(fns.averagePair(arr, targetAverage)).toBe(expected);
 });
+
+// ------------------------------------------------------------------------------------------------
+
+test.each([
+  ['hello', 'hello world', true],
+  ['sing', 'sting', true],
+  ['abc', 'abracadabra', true],
+  ['abc', 'acrabada', false]
+])('isSubsequence(%p, %p)', (s1, s2, expected) => {
+  expect(fns.isSubsequence(s1, s2)).toBe(expected);
+});
