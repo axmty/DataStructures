@@ -126,6 +126,24 @@ export function averagePair(arr, targetAverage) {
 
 // ------------------------------------------------------------------------------------------------
 
+// Returns true if and only if the first string is a subsequence of the second one.
+// O(1) space - O(n + m) time
+export function isSubsequence(s1, s2) {
+  let i1 = 0;
+  let i2 = 0;
+  while (i1 < s1.length && i2 < s2.length) {
+    if (s1[i1] === s2[i2]) {
+      i1++;
+    }
+
+    i2++;
+  }
+
+  return i1 === s1.length;
+}
+
+// ------------------------------------------------------------------------------------------------
+
 // Returns the maximum sum of a subarray of the given length.
 // O(1) space - O(n) time
 export function maxSubarraySum(arr, sliceLength) {
