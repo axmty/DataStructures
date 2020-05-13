@@ -172,6 +172,7 @@ export function maxSubarraySum(arr, sliceLength) {
 // Returns the minimal length of a subarray of which the sum is
 // greater than or equal to the second integer argument.
 // Returns 0 if such a subarray is not found.
+// O(1) space - O(n) time
 export function minSubarrayLength(arr, target) {
   let start = 0;
   let end = 0;
@@ -185,9 +186,7 @@ export function minSubarrayLength(arr, target) {
 
     if (sum < target || start >= end) {
       end++;
-      if (end < arr.length) {
-        sum += arr[end];
-      }
+      sum += arr[end];
     } else {
       sum -= arr[start];
       start++;
@@ -195,4 +194,31 @@ export function minSubarrayLength(arr, target) {
   }
 
   return minLen === Infinity ? 0 : minLen;
+}
+
+// ------------------------------------------------------------------------------------------------
+
+export function findLongestSubstring(str) {
+  let start = 0;
+  let end = 0;
+  let maxLen = 1;
+  const letters = new Map();
+  letters.set(str[0], 1);
+
+  while (end < str.length) {
+    const allDistinct = [...letters.values()].every(count => !count);
+    if (allDistinct) {
+      maxLen = Math.max(maxLen, end - start + 1);
+    }
+
+    if (allDistinct || start >= end) {
+      end++;
+      letters.set(str[end], (letters.get(str[end]) || 0) + 1);
+    } else {
+      letters.set(str[end], letters.get(str[start]) - 1);
+      start++;
+    }
+  }
+
+  return maxLen;
 }
