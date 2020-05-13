@@ -166,3 +166,33 @@ export function maxSubarraySum(arr, sliceLength) {
 
   return max;
 }
+
+// ------------------------------------------------------------------------------------------------
+
+// Returns the minimal length of a subarray of which the sum is
+// greater than or equal to the second integer argument.
+// Returns 0 if such a subarray is not found.
+export function minSubarrayLength(arr, target) {
+  let start = 0;
+  let end = 0;
+  let minLen = Infinity;
+  let sum = arr[0];
+
+  while (end < arr.length) {
+    if (sum >= target) {
+      minLen = Math.min(minLen, end - start + 1);
+    }
+
+    if (sum < target || start >= end) {
+      end++;
+      if (end < arr.length) {
+        sum += arr[end];
+      }
+    } else {
+      sum -= arr[start];
+      start++;
+    }
+  }
+
+  return minLen === Infinity ? 0 : minLen;
+}
