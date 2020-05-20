@@ -8,7 +8,7 @@ namespace Algorithms
     {
         // Returns true if and only if the two strings are anagrams.
         // O(1) space - O(n) time
-        public static bool AreAnagrams(string first, string second)
+        public static bool AreAnagrams_WithSingleLookup(string first, string second)
         {
             if (first.Length != second.Length)
             {
@@ -36,6 +36,7 @@ namespace Algorithms
         }
 
         // Using Linq to create a dictionary for each string, then calculate the intersection of both.
+        // O(1) space - O(n) time
         public static bool AreAnagrams_WithDictionaryCompare(string first, string second)
         {
             static Dictionary<char, int> MakeDictionary(string str) => str
