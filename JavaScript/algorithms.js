@@ -1,5 +1,3 @@
-// ------------------------------------------------------------------------------------------------
-
 // Returns true if and only if the two strings are anagrams.
 // O(1) space - O(n) time
 export function areAnagrams(first, second) {
@@ -36,7 +34,6 @@ export function countUniqueValues_noExtraStructure(arr) {
   }
 
   let count = 1;
-  let val = arr[0];
   for (let i = 1; i < arr.length; i++) {
     if (arr[i - 1] !== arr[i]) {
       count++;

@@ -48,5 +48,31 @@ namespace Algorithms
 
             return fstDict.Intersect(sndDict).Count() == fstDict.Count();
         }
+
+        // ------------------------------------------------------------------------------------------------------------
+
+        // Returns the number of unique values in the array.
+        // With no extra data structure, array needs to be sorted.
+        // O(1) space - O(n) time
+        public static int CountUniqueValues_NoExtraStructure<T>(T[] arr, IEqualityComparer<T> equalityComparer = null)
+        {
+            if (arr.Length == 0)
+            {
+                return 0;
+            }
+
+            int count = 1;
+            equalityComparer ??= EqualityComparer<T>.Default;
+
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (!equalityComparer.Equals(arr[i]  != arr[i - 1]))
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
     }
 }
