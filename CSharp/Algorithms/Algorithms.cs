@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Algorithms
 {
@@ -31,6 +33,19 @@ namespace Algorithms
             }
 
             return true;
+        }
+
+        // Using Linq to create a dictionary for each string, then calculate the intersection of both.
+        public static bool AreAnagrams_WithDictionaryCompare(string first, string second)
+        {
+            static Dictionary<char, int> MakeDictionary(string str) => str
+                .GroupBy(c => c, (key, group) => new Tuple<char, int>(key, group.Count()))
+                .ToDictionary(x => x.Item1, x => x.Item2);
+
+            var fstDict = MakeDictionary(first);
+            var sndDict = MakeDictionary(second);
+
+            return fstDict.Intersect(sndDict).Count() == fstDict.Count();
         }
     }
 }
