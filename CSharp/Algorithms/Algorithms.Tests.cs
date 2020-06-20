@@ -34,7 +34,7 @@ namespace Algorithms
 
 
         public static IEnumerable<object[]> TestCases_CountUniqueValues = new[]
-{
+        {
             new object[] { new object[] { 1, 1, 1, 1, 2 }, 2 },
             new object[] { new object[] { 1, 2, 3, 4, 4, 4, 5, 5, 12, 13 }, 7 },
             new object[] { new object[] { }, 0 },
@@ -45,9 +45,16 @@ namespace Algorithms
 
         [Theory]
         [MemberData(nameof(TestCases_CountUniqueValues))]
-        public void Test_CountUniqueValues(object[] values, int expected)
+        public void Test_CountUniqueValues_NoExtraStructure(object[] values, int expected)
         {
             CountUniqueValues_NoExtraStructure(values).Should().Be(expected);
+        }
+
+        [Theory]
+        [MemberData(nameof(TestCases_CountUniqueValues))]
+        public void Test_CountUniqueValues_WithSet(object[] values, int expected)
+        {
+            CountUniqueValues_WithHashSet(values).Should().Be(expected);
         }
     }
 }

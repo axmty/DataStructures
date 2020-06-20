@@ -74,5 +74,12 @@ namespace Algorithms
 
             return count;
         }
+
+        // With HashSet, array does not need to be sorted.
+        // O(n) space - O(n) time
+        public static int CountUniqueValues_WithHashSet<T>(T[] arr, IEqualityComparer<T> equalityComparer = null)
+        {
+            return new HashSet<T>(arr, equalityComparer ?? EqualityComparer<T>.Default).Count;
+        }
     }
 }
