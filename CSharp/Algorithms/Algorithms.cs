@@ -66,7 +66,7 @@ namespace Algorithms
 
             for (int i = 1; i < arr.Length; i++)
             {
-                if (!equalityComparer.Equals(arr[i]  != arr[i - 1]))
+                if (!equalityComparer.Equals(arr[i], arr[i - 1]))
                 {
                     count++;
                 }
