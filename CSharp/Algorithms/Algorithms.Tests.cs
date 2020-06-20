@@ -32,6 +32,7 @@ namespace Algorithms
             AreAnagrams_WithDictionaryCompare(first, second).Should().Be(expected);
         }
 
+        // ------------------------------------------------------------------------------------------------------------
 
         public static IEnumerable<object[]> TestCases_CountUniqueValues = new[]
         {
@@ -55,6 +56,19 @@ namespace Algorithms
         public void Test_CountUniqueValues_WithSet(object[] values, int expected)
         {
             CountUniqueValues_WithHashSet(values).Should().Be(expected);
+        }
+
+        // ------------------------------------------------------------------------------------------------------------
+
+        [Theory]
+        [InlineData(1, 1, true)]
+        [InlineData(1, 2, false)]
+        [InlineData(123, 321, true)]
+        [InlineData(12, 32, false)]
+        [InlineData(11, 1, false)]
+        public void Test_HaveSameDigitFrequencies(int x, int y, bool expected)
+        {
+            HaveSameDigitFrequencies(x, y).Should().Be(expected);
         }
     }
 }

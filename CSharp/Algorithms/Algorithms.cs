@@ -81,5 +81,14 @@ namespace Algorithms
         {
             return new HashSet<T>(arr, equalityComparer ?? EqualityComparer<T>.Default).Count;
         }
+
+        // ------------------------------------------------------------------------------------------------------------
+
+        // Returns true if and and only if the two positive integers have the same frequency of digits.
+        // O(1) space - O(n) time
+        public static bool HaveSameDigitFrequencies(int x, int y)
+        {
+            return AreAnagrams_WithSingleLookup(x.ToString(), y.ToString());
+        }
     }
 }
