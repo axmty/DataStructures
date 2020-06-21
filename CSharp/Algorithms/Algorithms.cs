@@ -91,5 +91,15 @@ namespace Algorithms
         {
             return AreAnagrams_WithSingleLookup(x.ToString(), y.ToString());
         }
+
+        // ------------------------------------------------------------------------------------------------------------
+
+        // Returns true if and only if there are duplicated arguments.
+        // With extra lookup Object.
+        // O(n) space - O(n) time
+        public static bool AreThereDuplicates_WithHashSet<T>(T[] arr, IEqualityComparer<T> equalityComparer = null)
+        {
+            return new HashSet<T>(arr, equalityComparer ?? EqualityComparer<T>.Default).Count != arr.Length;
+        }
     }
 }

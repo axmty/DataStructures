@@ -70,5 +70,24 @@ namespace Algorithms
         {
             HaveSameDigitFrequencies(x, y).Should().Be(expected);
         }
+
+        // ------------------------------------------------------------------------------------------------------------
+
+        public static IEnumerable<object[]> TestCases_AreThereDuplicates = new[]
+        {
+            new object[] { new object[] { }, false },
+            new object[] { new object[] { 1 }, false },
+            new object[] { new object[] { 1, 1, 2 }, true },
+            new object[] { new object[] { 1, 2, 3 }, false },
+            new object[] { new object[] { 'a', 'b', 'c' }, false },
+            new object[] { new object[] { 'a', 'b', 'c', 'a' }, true }
+        };
+
+        [Theory]
+        [MemberData(nameof(TestCases_AreThereDuplicates))]
+        public void Test_AreThereDuplicates_WithHashSet(object[] values, bool expected)
+        {
+            AreThereDuplicates_WithHashSet(values).Should().Be(expected);
+        }
     }
 }
