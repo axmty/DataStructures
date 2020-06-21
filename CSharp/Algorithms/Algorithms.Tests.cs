@@ -89,5 +89,12 @@ namespace Algorithms
         {
             AreThereDuplicates_WithHashSet(values).Should().Be(expected);
         }
+
+        [Theory]
+        [MemberData(nameof(TestCases_AreThereDuplicates))]
+        public void Test_AreThereDuplicates_WithSorting(object[] values, bool expected)
+        {
+            AreThereDuplicates_WithSorting(values).Should().Be(expected);
+        }
     }
 }

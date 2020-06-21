@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -100,6 +101,25 @@ namespace Algorithms
         public static bool AreThereDuplicates_WithHashSet<T>(T[] arr, IEqualityComparer<T> equalityComparer = null)
         {
             return new HashSet<T>(arr, equalityComparer ?? EqualityComparer<T>.Default).Count != arr.Length;
+        }
+
+        // With sorting.
+        // O(1) space - O(nlog(n)) time (sort complexity)
+        public static bool AreThereDuplicates_WithSorting<T>(T[] arr, IComparer<T> comparer = null)
+        {
+            comparer ??= Comparer<T>.Default;
+
+            Array.Sort(arr, comparer);
+
+            for (int i = 1; i < arr.Length; i++)
+            {
+                if (comparer.Compare(arr[i - 1], arr[i]) == 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
