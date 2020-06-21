@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -40,8 +39,10 @@ namespace Algorithms
         public static bool AreAnagrams_WithDictionaryCompare(string first, string second)
         {
             static Dictionary<char, int> MakeDictionary(string str) => str
-                .GroupBy(c => c, (key, group) => new Tuple<char, int>(key, group.Count()))
-                .ToDictionary(x => x.Item1, x => x.Item2);
+                .GroupBy(
+                    c => c,
+                    (charKey, chars) => ((char Char, int CharCount))(charKey, chars.Count()))
+                .ToDictionary(x => x.Char, x => x.CharCount);
 
             var fstDict = MakeDictionary(first);
             var sndDict = MakeDictionary(second);
