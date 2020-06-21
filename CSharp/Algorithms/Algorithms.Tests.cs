@@ -96,5 +96,23 @@ namespace Algorithms
         {
             AreThereDuplicates_WithSorting(values).Should().Be(expected);
         }
+
+        private class ModuloThreeEqualityComparer : IEqualityComparer<int>, IComparer<int>
+        {
+            public int Compare(int x, int y)
+            {
+                return Comparer<int>.Default.Compare(x % 3, y % 3);
+            }
+
+            public bool Equals(int x, int y)
+            {
+                return this.Compare(x, y) == 0;
+            }
+
+            public int GetHashCode(int obj)
+            {
+                return EqualityComparer<int>.Default.GetHashCode(obj);
+            }
+        }
     }
 }
