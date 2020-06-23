@@ -6,6 +6,8 @@ namespace Algorithms
 {
     public partial class Algorithms
     {
+        #region AreAnagrams
+
         // Returns true if and only if the two strings are anagrams.
         // O(1) space - O(n) time
         public static bool AreAnagrams_WithSingleLookup(string first, string second)
@@ -51,7 +53,9 @@ namespace Algorithms
             return fstDict.Intersect(sndDict).Count() == fstDict.Count();
         }
 
-        // ------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region CountUniqueValues
 
         // Returns the number of unique values in the array.
         // With no extra data structure, array needs to be sorted.
@@ -84,7 +88,9 @@ namespace Algorithms
             return new HashSet<T>(arr, equalityComparer ?? EqualityComparer<T>.Default).Count;
         }
 
-        // ------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region HaveSameDigitFrequencies
 
         // Returns true if and and only if the two positive integers have the same frequency of digits.
         // O(1) space - O(n) time
@@ -93,7 +99,9 @@ namespace Algorithms
             return AreAnagrams_WithSingleLookup(x.ToString(), y.ToString());
         }
 
-        // ------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region AreThereDuplicates
 
         // Returns true if and only if there are duplicated arguments.
         // With extra lookup Object.
@@ -121,5 +129,7 @@ namespace Algorithms
 
             return false;
         }
+
+        #endregion
     }
 }

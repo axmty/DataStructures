@@ -6,6 +6,8 @@ namespace Algorithms
 {
     public partial class Algorithms
     {
+        #region AreAnagrams
+
         public static IEnumerable<object[]> TestCases_AreAnagrams = new[]
         {
             new object[] { "", "", true },
@@ -32,7 +34,9 @@ namespace Algorithms
             AreAnagrams_WithDictionaryCompare(first, second).Should().Be(expected);
         }
 
-        // ------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region CountUniqueValues
 
         public static IEnumerable<object[]> TestCases_CountUniqueValues = new[]
         {
@@ -58,7 +62,9 @@ namespace Algorithms
             CountUniqueValues_WithHashSet(values).Should().Be(expected);
         }
 
-        // ------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region HaveSameDigitFrequencies
 
         [Theory]
         [InlineData(1, 1, true)]
@@ -71,7 +77,9 @@ namespace Algorithms
             HaveSameDigitFrequencies(x, y).Should().Be(expected);
         }
 
-        // ------------------------------------------------------------------------------------------------------------
+        #endregion
+
+        #region AreThereDuplicates
 
         public static IEnumerable<object[]> TestCases_AreThereDuplicates = new[]
         {
@@ -114,5 +122,7 @@ namespace Algorithms
                 return EqualityComparer<int>.Default.GetHashCode(obj);
             }
         }
+
+        #endregion
     }
 }
